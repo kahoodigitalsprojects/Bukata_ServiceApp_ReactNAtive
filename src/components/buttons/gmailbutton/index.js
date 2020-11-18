@@ -17,12 +17,13 @@ const App = () => {
       }}>
       <Image
         source={require('../../../assets/icons/google.png')}
-        style={{height: 25, width: 20, resizeMode: 'contain',}}
+        style={{height: 25, width: 20, resizeMode: 'contain'}}
       />
       <Text
         style={{
           fontWeight: '600',
-          fontSize: 14,
+          fontSize: 13,
+          // fontWeight: 'bold',
           letterSpacing: 0.5,
           color: theme.googleButtonColor.textColor,
         }}>

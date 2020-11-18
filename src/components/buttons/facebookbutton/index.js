@@ -23,7 +23,8 @@ const App = () => {
       <Text
         style={{
           fontWeight: '600',
-          fontSize: 14,
+          fontSize: 13,
+          // fontWeight: 'bold',
           letterSpacing: 0.5,
           color: theme.facebookButtonColor.textColor,
         }}>

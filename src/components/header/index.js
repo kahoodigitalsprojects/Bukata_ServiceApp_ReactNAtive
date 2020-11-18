@@ -12,6 +12,7 @@ const App = ({isTransparent, text, isVisibleIcon, drawerIcon}) => {
         alignItems: 'center',
         width: '100%',
         flexDirection: 'row',
+        elevation: 5,
         backgroundColor: isTransparent ? 'transparent' : theme.headerColor,
       }}>
       {isVisibleIcon && (

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Button} from 'react-native-elements';
 import {butttonTheme} from '../../../constants/theme';
-// import Fontisto from 'react-native-vector-icons/Fontisto';
 
 const App = ({
   onPress,
@@ -9,6 +8,7 @@ const App = ({
   buttonStyle,
   titleStyle,
   title,
+  size,
   containerStyle,
 }) => {
   const [theme, setTheme] = useState('background');
@@ -49,6 +49,7 @@ const App = ({
           alignItems: 'center',
           borderRadius: 25,
           justifyContent: 'center',
+          // elevation: 5,
         },
       ]}
     />

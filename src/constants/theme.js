@@ -55,6 +55,7 @@ const theme = {
     gray: '#8b8b8b',
     black: '#000000',
     dark: '#202020',
+    placeholderIcon: '#777777',
     white: '#FFFFFF',
   },
 
@@ -62,6 +63,7 @@ const theme = {
     circleLight: '#ffeb41',
     circleDark: '#fa990a',
     profileBG: '#ff9700',
+    makeOfferBG: '#e0e0e0',
   },
 };
 
@@ -69,26 +71,28 @@ const butttonTheme = {
   background: {
     buttonStyle: {
       backgroundColor: theme.globalButtonColor.background,
-      width: 152.5,
-      height: 45,
-      borderRadius: 25,
+      width: 300,
+      height: 48,
+      borderRadius: 17,
     },
     titleStyle: {
       color: theme.globalButtonColor.textWhite,
-      fontSize: 14,
-      fontWeight: 'bold',
+      fontSize: 17,
+      fontFamily: 'Roboto-Bold',
+      // fontWeight: 'bold',
       letterSpacing: 1,
+      lineHeight: 30,
     },
   },
   border: {
     buttonStyle: {
       backgroundColor: 'transparent',
-      width: 152.5,
+      width: 120,
       height: 45,
       borderRadius: 0,
       borderWidth: 0.5,
       borderColor: theme.globalButtonColor.borderOrange,
-      borderRadius: 25,
+      borderRadius: 17,
     },
     titleStyle: {
       color: theme.globalButtonColor.textOrange,
