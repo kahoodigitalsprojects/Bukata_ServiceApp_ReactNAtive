@@ -1,85 +1,63 @@
 import React, {useState} from 'react';
-import {View, ImageBackground, ScrollView, Text, TextInput} from 'react-native';
+import {View, ScrollView, Text, TextInput} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {theme} from '../../../constants/theme';
-import Header from '../../../components/header';
 import GlobalButton from '../../../components/buttons/globalbutton';
+import BgCustom from '../../../components/bgcustom';
 
 const App = (props) => {
+  const [pickupA, setPickupA] = useState('');
+  const [dropoffA, setdropoffA] = useState('');
+  const [color, setColor] = useState('');
+  const [color2, setColor2] = useState('');
+  const [isError, setError] = useState(false);
+  const [isError2, setError2] = useState(false);
+
   function _Continue1() {
-    props.navigation.navigate('describepackage');
+    if (pickupA.length >= 1 && dropoffA.length >= 1) {
+      props.navigation.navigate('describepackage');
+      setError(false);
+      setError2(false);
+    } else if (pickupA == '') {
+      setError(true);
+    } else if (dropoffA == '') {
+      setError2(true);
+    } else {
+      setError(true);
+      setError2(true);
+    }
   }
   return (
-    <ImageBackground
-      source={require('../../../assets/images/bg7.png')}
-      style={{width: '100%', height: '100%', flex: 1}}
-      resizeMode="cover">
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        {/* ==========Header========== */}
-
-        <Header
-          text={true}
-          isTransparent={true}
-          isVisibleIcon={true}
-          //   drawerIcon={true}
-        />
-        {/* ++++++++++++++++++++ first whit text +++++++++++++ */}
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <BgCustom {...props} name="Route" suggest="Choose Your">
+        {/* ========== 2nd flex ========== */}
 
         <View
           style={{
-            flex: 0.33,
-            width: '87%',
-            alignSelf: 'center',
-            // backgroundColor: 'green',
-            justifyContent: 'center',
-          }}>
-          <Text
-            style={{
-              fontFamily: 'Roboto-Regular',
-              fontSize: 19,
-              color: theme.textColors.white,
-            }}>
-            Choose your
-          </Text>
-
-          <Text
-            style={{
-              fontSize: 22,
-              fontFamily: 'Roboto-Bold',
-              //   fontWeight: 'bold',
-              lineHeight: 30,
-              letterSpacing: 0.5,
-              color: theme.textColors.white,
-            }}>
-            Route
-          </Text>
-        </View>
-
-        {/* ++++++++++++++++++++ main view for text inputs +++++++++++++ */}
-
-        <View
-          style={{
-            flex: 0.2,
-            justifyContent: 'center',
+            flex: 0.9,
             alignItems: 'center',
             padding: 10,
+            width: '87%',
+            alignSelf: 'center',
             // backgroundColor: 'pink',
           }}>
-          {/* ==========1st TextInput========== */}
+          {/* ==========Pick Up Location========== */}
 
           <View
             style={{
               borderBottomWidth: 1,
-              borderColor: theme.bordersColor.borderColor,
+              borderColor: color
+                ? theme.bordersColor.darkOrangeB
+                : theme.bordersColor.borderColor,
               //   marginTop: 10,
-              width: '90%',
+              // width: '90%',
             }}>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <MaterialIcons
                 name="gps-not-fixed"
-                size={20}
-                color={theme.iconsColor.orange}
+                size={25}
+                color={theme.iconsColor.darkOrange}
               />
 
               <Text
@@ -97,7 +75,7 @@ const App = (props) => {
               <Text
                 style={{
                   color: theme.textColors.orange,
-                  fontSize: 12,
+                  fontSize: 15,
                   fontFamily: 'Roboto-Thin',
                   marginTop: 7,
                 }}>
@@ -108,12 +86,16 @@ const App = (props) => {
             <View
               style={{
                 flexDirection: 'row',
-                // justifyContent: 'space-between',
-                width: '100%',
+                alignItems: 'center',
               }}>
               <TextInput
                 placeholder="Pick Up address"
                 placeholderTextColor={theme.textColors.placeholder}
+                onChangeText={(Ptext) => {
+                  setPickupA(Ptext);
+                }}
+                onFocus={() => setColor(true)}
+                onBlur={() => setColor(false)}
                 style={{fontSize: 15, width: '90%'}}
               />
 
@@ -131,21 +113,34 @@ const App = (props) => {
               </View>
             </View>
           </View>
+          <View
+            style={{
+              alignItems: 'center',
+              marginVertical: 2,
+              width: '100%',
+              backgroundColor: isError ? '#ffeeee' : null,
+              borderRadius: 20,
+            }}>
+            <Text style={{color: 'red', fontSize: 12}}>
+              {isError ? 'Please Fill a Valid Address' : null}
+            </Text>
+          </View>
 
-          {/* ==========2nd TextInput========== */}
+          {/* ========== Package Destination ========== */}
 
           <View
             style={{
               borderBottomWidth: 1,
-              borderColor: theme.bordersColor.borderColor,
-              marginTop: 10,
-              width: '90%',
+              borderColor: color2
+                ? theme.bordersColor.darkOrangeB
+                : theme.bordersColor.borderColor,
+              marginTop: 20,
             }}>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <MaterialIcons
                 name="gps-fixed"
-                size={20}
-                color={theme.iconsColor.orange}
+                size={25}
+                color={theme.iconsColor.darkOrange}
               />
 
               <Text
@@ -174,12 +169,15 @@ const App = (props) => {
             <View
               style={{
                 flexDirection: 'row',
-                // justifyContent: 'space-between',
-                width: '100%',
               }}>
               <TextInput
                 placeholder="Drop off address"
                 placeholderTextColor={theme.textColors.placeholder}
+                onChangeText={(text) => {
+                  setdropoffA(text);
+                }}
+                onFocus={() => setColor2(true)}
+                onBlur={() => setColor2(false)}
                 style={{fontSize: 15, width: '90%'}}
               />
 
@@ -197,21 +195,35 @@ const App = (props) => {
               </View>
             </View>
           </View>
+          <View
+            style={{
+              alignItems: 'center',
+              marginVertical: 2,
+              width: '100%',
+              backgroundColor: isError2 ? '#ffeeee' : null,
+              borderRadius: 20,
+            }}>
+            <Text style={{color: 'red', fontSize: 12}}>
+              {isError2 ? 'Please Fill a Valid Destination' : null}
+            </Text>
+          </View>
         </View>
 
         {/* ========== Button ========== */}
 
         <View
           style={{
-            flex: 0.47,
+            flex: 0.1,
             justifyContent: 'flex-end',
             marginVertical: 10,
             // backgroundColor: 'red',
           }}>
           <GlobalButton title={'Continue'} onPress={() => _Continue1()} />
         </View>
-      </ScrollView>
-    </ImageBackground>
+      </BgCustom>
+      {/* ========== Toast Message ========== */}
+      {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
+    </ScrollView>
   );
 };
 export default App;

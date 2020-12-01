@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
+  Dimensions
 } from 'react-native';
 import {theme} from '../../../constants/theme';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -15,7 +16,7 @@ console.log('theame');
 
 const App = (props) => {
   function _Send() {
-    console.log("Sendes")
+    console.log('Sendes');
     props.navigation.navigate('chooseroute');
   }
 
@@ -35,13 +36,14 @@ const App = (props) => {
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <Header
           text={true}
+          navigation={props.navigation}
           isTransparent={true}
           //  isVisibleIcon={true}
           drawerIcon={true}
         />
         {/* ==========Slider========== */}
 
-        <View style={{flex: 0.5, justifyContent: 'flex-end', width: '100%'}}>
+        <View style={{flex: 0.5, justifyContent: 'flex-end', width: '100%',}}>
           <SliderBox
             images={images}
             // parentWidth={Dimensions.get('window').width / 1}
@@ -132,8 +134,8 @@ const App = (props) => {
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderRadius: 25,
-                height: 150,
+                borderRadius: 15,
+                height: 160,
                 width: 140,
                 backgroundColor: theme.secondaryColor,
               }}>
@@ -160,10 +162,18 @@ const App = (props) => {
               style={{
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderRadius: 25,
-                height: 150,
+                borderRadius: 15,
+                height: 160,
                 width: 140,
                 backgroundColor: theme.primaryColor,
+                // shadowColor: 'rgba(255, 0, 255, 1.0)',
+                // shadowOffset: {
+                //   width: 0,
+                //   height: 10,
+                // },
+                // shadowOpacity: 0.51,
+                // shadowRadius: 13.16,
+                // elevation: 20,
               }}>
               <Image
                 source={require('../../../assets/images/box.png')}

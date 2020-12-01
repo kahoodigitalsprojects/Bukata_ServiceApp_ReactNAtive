@@ -15,24 +15,30 @@ import success from '../screens/homes/success';
 import contactinfo from '../screens/homes/contactinfo';
 import taskdetail from '../screens/homes/taskdetail';
 import successtask from '../screens/homes/successtask';
+import splash from '../screens/auth/splash';
 const Stack = createStackNavigator();
 
 function Auth() {
   return (
-    <Stack.Navigator initialRouteName={'signin'}>
+    <Stack.Navigator initialRouteName={'splash'}>
       <Stack.Screen
         name="signin"
         component={signin}
         options={{headerShown: false}}
       />
       <Stack.Screen name="otp" component={otp} options={{headerShown: false}} />
+      <Stack.Screen
+        name="splash"
+        component={splash}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 }
 
 export function Homes() {
   return (
-    <Stack.Navigator initialRouteName={'successtask'}>
+    <Stack.Navigator initialRouteName={'home'}>
       <Stack.Screen
         name="home"
         component={home}
@@ -90,7 +96,7 @@ export function Homes() {
 function App() {
   return (
     <NavigationContainer headerMode="none" i>
-      <Stack.Navigator initialRouteName={'Homes'}>
+      <Stack.Navigator initialRouteName={'Auth'}>
         <Stack.Screen
           name="Auth"
           component={Auth}

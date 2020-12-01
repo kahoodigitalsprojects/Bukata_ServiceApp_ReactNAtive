@@ -1,12 +1,13 @@
 import React from 'react';
-import {Text, Image, TouchableOpacity} from 'react-native';
+import {Text, Image, TouchableOpacity, Linking} from 'react-native';
 import {theme} from '../../../constants/theme';
 
 const App = () => {
   return (
     <TouchableOpacity
+      onPress={() => Linking.openURL('https://www.facebook.com/')}
       style={{
-        width: '40%',
+        width: '45%',
         height: 45,
         backgroundColor: theme.facebookButtonColor.background,
         flexDirection: 'row',

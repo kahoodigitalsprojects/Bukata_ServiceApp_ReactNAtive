@@ -4,7 +4,7 @@ import {theme} from '../../constants/theme';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const App = ({isTransparent, text, isVisibleIcon, drawerIcon}) => {
+const App = ({isTransparent, text, isVisibleIcon, drawerIcon, navigation}) => {
   return (
     <View
       style={{
@@ -17,16 +17,24 @@ const App = ({isTransparent, text, isVisibleIcon, drawerIcon}) => {
       }}>
       {isVisibleIcon && (
         <TouchableOpacity
+          onPress={() => navigation.goBack()}
           style={{
             width: '15%',
+            padding: 5,
             alignItems: 'center',
             justifyContent: 'center',
+            // backgroundColor: 'pink'
           }}>
-          <AntDesign name="left" size={17} color={theme.iconsColor.black} />
+          <AntDesign
+            name="arrowleft"
+            size={20}
+            color={theme.iconsColor.white}
+          />
         </TouchableOpacity>
       )}
       {drawerIcon && (
         <TouchableOpacity
+          onPress={() => navigation.openDrawer()}
           style={{
             width: '15%',
             alignItems: 'center',
@@ -37,7 +45,13 @@ const App = ({isTransparent, text, isVisibleIcon, drawerIcon}) => {
       )}
       <View style={{flex: 1}}>
         {text && (
-          <Text style={{fontWeight: 'bold', fontSize: 20, letterSpacing: 0.5}}>
+          <Text
+            style={{
+              fontWeight: 'bold',
+              fontSize: 20,
+              letterSpacing: 0.5,
+              color: theme.textColors.white,
+            }}>
             {text}
           </Text>
         )}

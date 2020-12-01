@@ -13,17 +13,30 @@ import GlobalButton from '../../../components/buttons/globalbutton';
 import FacebookButton from '../../../components/buttons/facebookbutton';
 import GmailButton from '../../../components/buttons/gmailbutton';
 import Header from '../../../components/header';
-import {color} from 'react-native-reanimated';
-// console.log('theame');
+import Toastmessage from '../../../components/toastmessage';
 let path = '../../../assets/images/bg6.png';
 
 const App = (props) => {
   function _SignInB() {
-    props.navigation.navigate('drawer');
+    if (value == '') {
+      Toastmessage('Please Fill Inputs', '', 'info');
+    } else if (value.length >= 1) {
+      props.navigation.navigate('drawer');
+    } else {
+      Toastmessage('You enter wrong details', '', 'error');
+    }
   }
 
+  const [name, setname] = useState('');
   function _SignUpB() {
-    props.navigation.navigate('otp');
+    // let dbName = 'Samad';
+    if (name == '' || value == '') {
+      Toastmessage('Please Fill Inputs', '', 'info');
+    } else if (name.length >= 1 && value.length >= 1) {
+      props.navigation.navigate('otp');
+    } else {
+      Toastmessage('You enter wrong details', '', 'error');
+    }
   }
 
   // ==============PhoneInputs==============
@@ -32,13 +45,15 @@ const App = (props) => {
   const [valid, setValid] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
   const [isClicked, setClicked] = useState(false);
+  const [color, setColor] = useState('');
   const phoneInput = useRef();
+
   const _CreateAccount = () => {
     return (
       <View
         style={{
-          // flex: 0.2,
-          // backgroundColor: 'pink',
+          flex: 0.35,
+          // backgroundColor: 'green',
           width: '90%',
           alignSelf: 'center',
         }}>
@@ -48,10 +63,19 @@ const App = (props) => {
             width: '100%',
             alignSelf: 'center',
             marginTop: 20,
-            borderColor: theme.bordersColor.borderColor,
+            borderColor: color
+              ? theme.bordersColor.darkOrangeB
+              : theme.bordersColor.borderColor,
           }}>
           <Text style={{color: theme.textColors.yellow}}>Full Name</Text>
-          <TextInput placeholder={'John Doe'} />
+          <TextInput
+            placeholder={'Abdul Samad'}
+            onChangeText={(nameText) => {
+              setname(nameText);
+            }}
+            onFocus={() => setColor(true)}
+            onBlur={() => setColor(false)}
+          />
         </View>
         <Text
           style={{
@@ -61,7 +85,7 @@ const App = (props) => {
           Phone Number
         </Text>
         {/* =========Number Input========= */}
-        <View style={{width: '100%', alignSelf: 'center'}}>
+        <View style={{width: '100%', alignSelf: 'center', height: 70}}>
           {showMessage && (
             <View style={{}}>
               <Text>Value : {value}</Text>
@@ -74,27 +98,25 @@ const App = (props) => {
             onChangeText={(text) => {
               setValue(text);
             }}
-            value={'3172874198'}
+            // onFocus={() => setPhoneColor(true)}
+            // onBlur={() => setPhoneColor(false)}
+            value={value}
             containerStyle={{
-              height: 50,
+              // height: 50,
               width: '100%',
+              backgroundColor: 'transparent',
             }}
-            textInputStyle={{color: 'red'}}
-            placeholder="Enter the Number My brother YO YO!!"
+            // textInputStyle={{}}
+            placeholder="Enter the Number"
             textContainerStyle={{
               borderBottomWidth: 1,
-              borderColor: theme.bordersColor.borderColor,
+              borderColor: color
+                ? theme.bordersColor.darkOrangeB
+                : theme.bordersColor.borderColor,
               backgroundColor: 'transparent',
             }}
             codeTextStyle={{color: theme.textColors.placeholder}}
           />
-          {/* <TouchableOpacity
-            style={{height: 40, width: 100}}
-            onPress={() => {
-              const checkValid = phoneInput.current?.isValidNumber(value);
-              setShowMessage(true);
-              setValid(checkValid ? checkValid : false);
-            }}></TouchableOpacity> */}
         </View>
 
         {/* ==============Global Button============= */}
@@ -116,7 +138,7 @@ const App = (props) => {
       <View
         style={{
           // flex: 0.2,
-          // backgroundColor: 'pink',
+          // backgroundColor: 'blue',
           width: '90%',
           alignSelf: 'center',
         }}>
@@ -127,15 +149,23 @@ const App = (props) => {
           }}>
           Phone Number
         </Text>
+
         {/* =========Number Input========= */}
-        <View style={{width: '100%', alignSelf: 'center'}}>
-          {showMessage && (
+
+        <View
+          style={{
+            width: '100%',
+            alignSelf: 'center',
+            // height: 50,
+            marginVertical: 20,
+          }}>
+          {/* {showMessage && (
             <View style={{}}>
               <Text>Value : {value}</Text>
               <Text>Formatted Value : {formattedValue}</Text>
               <Text>Valid : {valid ? 'true' : 'false'}</Text>
             </View>
-          )}
+          )} */}
           <PhoneInput
             ref={phoneInput}
             defaultValue={value}
@@ -146,29 +176,23 @@ const App = (props) => {
             onChangeFormattedText={(text) => {
               setFormattedValue(text);
             }}
-            // withDarkTheme
+            withDarkTheme={false}
             // withShadow
             // autoFocus
             containerStyle={{
-              height: 50,
               width: '100%',
-              // color: theme.textColors.placeholder,
+              color: theme.textColors.placeholder,
+              backgroundColor: 'transparent',
             }}
             textContainerStyle={{
               borderBottomWidth: 1,
               borderColor: theme.bordersColor.borderColor,
-              backgroundColor: theme.bgColorWhite,
               color: theme.textColors.placeholder,
+              backgroundColor: 'transparent',
             }}
-            codeTextStyle={{color: theme.textColors.placeholder}}
-          />
-          <TouchableOpacity
-            style={{height: 40, width: 100}}
-            onPress={() => {
-              const checkValid = phoneInput.current?.isValidNumber(value);
-              setShowMessage(true);
-              setValid(checkValid ? checkValid : false);
-            }}></TouchableOpacity>
+            codeTextStyle={{
+              color: theme.textColors.placeholder,
+            }}></PhoneInput>
         </View>
         {/* ==============Global Button============= */}
 
@@ -188,7 +212,7 @@ const App = (props) => {
           <View
             style={{
               flexDirection: 'row',
-              width: '90%',
+              width: '100%',
               justifyContent: 'space-around',
             }}>
             <GmailButton />
@@ -224,7 +248,7 @@ const App = (props) => {
         />
         <View
           style={{
-            flex: 0.45,
+            flex: 0.6,
             justifyContent: 'flex-end',
             width: '90%',
             alignSelf: 'center',

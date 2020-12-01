@@ -1,38 +1,23 @@
 import React from 'react';
-import {ImageBackground, ScrollView, Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import GlobalButton from '../../../components/buttons/globalbutton';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import BgCustom from '../../../components/bgcustom';
+
 import {theme} from '../../../constants/theme';
 
-const App = () => {
+const App = (props) => {
+  function _Done() {
+    props.navigation.navigate('home');
+  }
   return (
-    <ImageBackground
-      source={require('../../../assets/images/bg7.png')}
-      style={{width: '100%', height: '100%', flex: 1}}
-      resizeMode="cover">
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        {/* ++++++++++++++++++ icon View +++++++++++++++ */}
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <BgCustom {...props} icon={true}>
+        {/* ========== Text View ========== */}
+
         <View
           style={{
-            flex: 0.5,
-            // backgroundColor: 'gray',
-            width: '85%',
-            justifyContent: 'center',
-            alignSelf: 'center',
-          }}>
-          <View>
-            <AntDesign
-              name="checkcircleo"
-              size={80}
-              color={theme.iconsColor.white}
-            />
-          </View>
-        </View>
-        {/* ++++++++++++++++center Text View +++++++++++++++++ */}
-        <View
-          style={{
-            flex: 0.5,
-            //   backgroundColor: 'pink',
+            flex: 0.8,
+            // backgroundColor: 'pink',
             alignItems: 'center',
             width: '85%',
 
@@ -87,12 +72,13 @@ const App = () => {
           <GlobalButton
             buttonTheme={'border'}
             title={'DONE'}
+            onPress={() => _Done()}
             buttonStyle={{width: 300}}
             titleStyle={{fontSize: 13}}
           />
         </View>
-      </ScrollView>
-    </ImageBackground>
+      </BgCustom>
+    </ScrollView>
   );
 };
 export default App;

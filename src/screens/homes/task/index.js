@@ -1,20 +1,26 @@
 import React, {useState} from 'react';
-import {ScrollView, View, Text, SafeAreaView} from 'react-native';
+import {ScrollView, View, Text, SafeAreaView, Picker} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Header from '../../../components/header';
 import {theme} from '../../../constants/theme';
-
+import DropDownPicker from 'react-native-dropdown-picker';
 const Task = (props) => {
-  
+  function _Click(item) {
+    props.navigation.navigate('taskdetail', {selectedTask: item});
+  }
+  const [country, setCountry] = useState('');
+  const [isVisibleA, setisVisibleA] = useState(false);
+  // const [selectedValue, setSelectedValue] = useState('Sort By');
   const [array, setArray] = useState([
     {
       Price: '1200',
       day: 'Monday',
       date: 'Mid-day 10am to 2pm',
       fname: 'J',
-      name: 'Johan Doe',
-      request: 'Requests 5',
+      name: 'Abdul Samad',
+      request: 'Requests 16',
       adress: 'First Gate Dadinkowa',
       street: 'Mess Place ,Rayfiewl',
     },
@@ -22,7 +28,7 @@ const Task = (props) => {
       Price: '1200',
       day: 'Monday',
       date: 'Mid-day 10am to 2pm',
-      fname: 'k',
+      fname: 'M',
       name: 'Martha',
       request: 'Requests 8',
       adress: 'First Gate Dadinkowa',
@@ -32,7 +38,7 @@ const Task = (props) => {
       Price: '1200',
       day: 'Monday',
       date: 'Mid-day 10am to 2pm',
-      fname: 'L',
+      fname: 'A',
       name: 'Aleeza',
       request: 'Requests 6',
       adress: 'First Gate Dadinkowa',
@@ -40,7 +46,7 @@ const Task = (props) => {
     },
   ]);
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: theme.bgColorWhite}}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         {/* ==========Header========== */}
 
@@ -48,6 +54,7 @@ const Task = (props) => {
           text={'Tasks'}
           isTransparent={false}
           isVisibleIcon={true}
+          navigation={props.navigation}
           //   drawerIcon={true}
         />
         {/* ++++++++++++++++  main Container +++++++++++++++++++ */}
@@ -71,9 +78,70 @@ const Task = (props) => {
 
             <View
               style={{
-                flexDirection: 'row',
+                // backgroundColor: 'skyblue',
+                width: '37%',
+                // marginVertical: 50,
+                // zIndex: 9999,
               }}>
-              <Text style={{color: theme.textColors.black}}>Sort by</Text>
+              <DropDownPicker
+                items={[
+                  {label: 'Name', value: 'name'},
+                  {label: 'Size', value: 'size'},
+                  {label: 'ItemType', value: 'itemTpe'},
+                  {label: 'DateModified', value: 'dateModified'},
+                ]}
+                placeholder="Sort By"
+                defaultValue={country}
+                style={{borderWidth: 1, elevation: 1}}
+                // isVisible={isVisibleA}
+                // onOpen={() => setisVisibleA(true) }
+                // onClose={() => setisVisibleA(false) }
+                onChangeItem={(item) => setCountry(item.value)}
+              />
+              {/* <DropDownPicker
+                items={[
+                  {
+                    label: 'Name',
+                    value: 'name',
+                    
+                  },
+                  {
+                    label: 'Item',
+                    value: 'item',
+                  },
+                  {
+                    label: 'DateModified',
+                    value: 'Datemodified',
+                  },
+                ]}
+                placeholder="Sort"
+                defaultValue={country}
+               
+           
+                containerStyle={{height: 40}}
+                style={{backgroundColor: '#FFF', elevation: 0, borderWidth: 0}}
+                itemStyle={{
+                  justifyContent: 'flex-start',
+                }}
+                labelStyle={{}}
+                dropDownStyle={{}}
+                onChangeItem={item => console.log("Ss=====s",item) }
+              /> */}
+
+              {/* <Picker
+                selectedValue={selectedValue}
+                style={{height: 50, width: 120}}
+                onValueChange={(itemValue, itemIndex) =>
+                  setSelectedValue(itemValue)
+                }>
+                <Picker.Item label="Sort By" value="java" />
+                <Picker.Item label="Name" value="java" />
+                <Picker.Item label="Size" value="js" />
+                <Picker.Item label="Item Type" Item Type="java" />
+                <Picker.Item label="Date Modified" value="java" />
+              </Picker> */}
+
+              {/* <Text style={{color: theme.textColors.black}}>Sort by</Text>
 
               <AntDesign
                 name="caretdown"
@@ -85,7 +153,7 @@ const Task = (props) => {
                   marginLeft: 3,
                   padding: 2,
                 }}
-              />
+              /> */}
             </View>
           </View>
         </View>
@@ -94,10 +162,11 @@ const Task = (props) => {
 
         {array.map((item, i) => {
           return (
-            <View
+            <TouchableOpacity
+              onPress={() => _Click(item)}
               key={i}
               style={{
-                elevation: 2,
+                elevation: 1.5,
                 backgroundColor: theme.taskColors.bgColorWhite,
                 width: '90%',
                 borderRadius: 10,
@@ -316,7 +385,7 @@ const Task = (props) => {
                   </Text>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           );
         })}
       </ScrollView>

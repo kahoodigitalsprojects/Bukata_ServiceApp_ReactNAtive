@@ -4,29 +4,34 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import GlobalButton from '../../../components/buttons/globalbutton';
 import {theme} from '../../../constants/theme';
 
-const App = () => {
+const App = (props) => {
+  function _Done() {
+    props.navigation.navigate('home');
+  }
   return (
-    <ImageBackground
-      source={require('../../../assets/images/bg7.png')}
-      style={{width: '100%', height: '100%', flex: 1}}
-      resizeMode="cover">
+    <View style={{flex: 1, backgroundColor: theme.bgColorWhite}}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View
-          style={{
-            flex: 0.5,
-            //   backgroundColor: 'gray',
-            width: '85%',
-            justifyContent: 'center',
-            alignSelf: 'center',
-          }}>
-          <View>
-            <AntDesign
-              name="checkcircleo"
-              size={80}
-              color={theme.iconsColor.white}
-            />
+        <ImageBackground
+          source={require('../../../assets/images/bgcrop.png')}
+          style={{width: '100%', height: 235}}
+          resizeMode="cover">
+          <View
+            style={{
+              flex: 1,
+              //   backgroundColor: 'gray',
+              width: '85%',
+              justifyContent: 'center',
+              alignSelf: 'center',
+            }}>
+            <View>
+              <AntDesign
+                name="checkcircleo"
+                size={80}
+                color={theme.iconsColor.white}
+              />
+            </View>
           </View>
-        </View>
+        </ImageBackground>
 
         {/* +++++++++++++ center View ++++++++ */}
 
@@ -95,11 +100,11 @@ const App = () => {
             title={'DONE'}
             buttonTheme={'border'}
             buttonStyle={{width: 300}}
-            onPress={() => _Continue2()}
+            onPress={() => _Done()}
           />
         </View>
       </ScrollView>
-    </ImageBackground>
+    </View>
   );
 };
 export default App;

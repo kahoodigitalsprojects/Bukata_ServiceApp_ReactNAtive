@@ -3,85 +3,102 @@ import {
   ScrollView,
   View,
   Text,
-  ImageBackground,
-  TextInput,
   Image,
+  Platform,
   TouchableOpacity,
 } from 'react-native';
-import {theme} from '../../../constants/theme';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Header from '../../../components/header';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import {theme} from '../../../constants/theme';
+import BgCustom from '../../../components/bgcustom';
 import GlobalButton from '../../../components/buttons/globalbutton';
+import moment from 'moment';
+import Toast from 'react-native-toast-message';
+const App = (props) => {
+  function _Continue3() {
+    props.navigation.navigate('contactinfo');
+  }
 
-const App = () => {
-  const [isOpen, setOpen] = useState(false);
+  // ==========Date & Time States==========
+
+  const [date, setDate] = useState(new Date(1598051730000));
+  const [mode, setMode] = useState('date');
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
+
+  // ========== Using Map ==========
+
+  const [array, setarray] = useState([
+    {
+      image: require('../../../assets/icons/sunrise.png'),
+      title1: 'Morning',
+      title2: 'before 10am',
+    },
+    {
+      image: require('../../../assets/icons/dawn.png'),
+      title1: 'Mid Day',
+      title2: '10am-2pm',
+    },
+    {
+      image: require('../../../assets/icons/sun.png'),
+      title1: 'Afternoon',
+      title2: '2pm-6pm',
+    },
+    {
+      image: require('../../../assets/icons/half-moon.png'),
+      title1: 'Evening',
+      title2: 'after 6pm',
+    },
+  ]);
+  // ==========Border Change Function & State==========
+  const [change, setChange] = useState('');
+  const _Change = (i) => {
+    setChange(i);
+  };
   return (
-    <ImageBackground
-      source={require('../../../assets/images/bg8.png')}
-      style={{width: '100%', height: '100%', flex: 1}}
-      resizeMode="cover">
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        {/* ==========Header========== */}
-
-        <Header
-          text={true}
-          isTransparent={true}
-          isVisibleIcon={true}
-          //   drawerIcon={true}
-        />
-        {/* ======== */}
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <BgCustom {...props} name="Date & Time" suggest="Set Your">
+        {/* ========Second Flex ======== */}
 
         <View
           style={{
-            width: '90%',
-            alignSelf: 'center',
-            flex: 0.55,
-            justifyContent: 'center',
-          }}>
-          <Text
-            style={{
-              color: theme.textColors.white,
-              fontFamily: 'Roboto-Regular',
-              fontSize: 19,
-              //   fontWeight: 'bold',
-            }}>
-            Set Your
-          </Text>
-          <Text
-            style={{
-              color: theme.textColors.white,
-              fontSize: 22,
-              fontFamily: 'Roboto-Bold',
-              //   fontWeight: 'bold',
-            }}>
-            Date & Time
-          </Text>
-        </View>
-
-        {/* ===== */}
-
-        <View
-          style={{
-            width: '90%',
-            flex: 0.25,
-            justifyContent: 'center',
+            width: '85%',
+            flex: 0.9,
+            // justifyContent: 'center',
             // alignItems: 'center',
             alignSelf: 'center',
           }}>
-          {/* ==========Row========== */}
+          {/* ==========Date & Time Row========== */}
+
           <View
             style={{
               flexDirection: 'row',
-              // backgroundColor: 'pink',
               alignItems: 'center',
-              //   width: '90%',
             }}>
-            <Entypo name="calendar" color={theme.iconsColor.orange} size={18} />
+            <Entypo name="calendar" color={theme.iconsColor.orange} size={25} />
 
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 17,
                 marginLeft: 10,
                 fontFamily: 'Roboto-Bold',
                 color: theme.textColors.lightBlack,
@@ -90,202 +107,101 @@ const App = () => {
             </Text>
           </View>
 
-          {/* +++++++++++++++ TextInput main View ++++++++++++= */}
+          {/* ========== Date & Time Code ========== */}
 
           <View
             style={{
-              //   width: '90%',
-              //   alignSelf: 'center',
+              backgroundColor: theme.chooseDateBG,
+              width: '100%',
               marginVertical: 12,
               borderRadius: 0,
               elevation: 1,
-              backgroundColor: theme.chooseDateBG,
+              alignSelf: 'center',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
             }}>
-            <View
-              style={{
-                backgroundColor: theme.chooseDateBG,
-                width: '100%',
-                alignSelf: 'center',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-              }}>
-              <TextInput
-                placeholder="Choose Date"
-                placeholderTextColor={theme.textColors.placeholder}
-                style={{padding: 10}}
-              />
-              <TouchableOpacity
-                style={{
-                  justifyContent: 'center',
-                  padding: 10,
-                  //   backgroundColor: 'pink',
-                }}
-                onPress={() => setOpen(!isOpen)}>
-                <AntDesign
-                  name="caretdown"
-                  size={12}
-                  color={theme.iconsColor.placeholderIcon}
-                />
-              </TouchableOpacity>
+            <View style={{justifyContent: 'center', paddingLeft: 7}}>
+              <Text>{`${moment(date).format(' dddd, DD MMM YYYY')}`}</Text>
             </View>
-
-            {/* +++++++++++++++++ dropdown view +++++++++++++++ */}
-
-            {isOpen ? (
-              <View>
-                <Text>24/jan/2020</Text>
-                <Text>24/feb/2020</Text>
-                <Text>24/mar/2020</Text>
-              </View>
-            ) : null}
+            <TouchableOpacity
+              style={{
+                justifyContent: 'center',
+                padding: 10,
+                // backgroundColor: 'pink',
+              }}
+              onPress={showDatepicker}>
+              <AntDesign
+                name="caretdown"
+                size={12}
+                color={theme.iconsColor.placeholderIcon}
+              />
+            </TouchableOpacity>
           </View>
-          {/* +++++++++++++++++++++++++ Cente view row1 for icon +++++++++++++ */}
+
+          <View>
+            {/* <Button onPress={showTimepicker} title="Show time picker!" /> */}
+            {show && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={date}
+                mode={mode}
+                is24Hour={false}
+                display="default"
+                onChange={onChange}
+              />
+            )}
+          </View>
+
+          {/* ========== Box Row Wrap ==========  */}
+
           <View
             style={{
               alignItems: 'center',
               flexDirection: 'row',
+              flexWrap: 'wrap',
               justifyContent: 'space-between',
             }}>
-            {/* +++++++++++++++++++++++++  box1 +++++++++++++  */}
-            <View
-              style={{
-                backgroundColor: theme.bgColorWhite,
-                width: '48%',
-                // height: 100,
-                padding: 5,
-                elevation: 2,
-                borderRadius: 10,
-                borderWidth: 1,
-                borderColor: theme.bordersColor.orangeBorder,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Image
-                source={require('../../../assets/icons/sunrise.png')}
-                style={{width: 55, height: 55}}
-              />
+            {/* ========== Box with Map ==========  */}
 
-              <Text style={{fontSize: 13, fontFamily: 'Roboto-Regular'}}>
-                Morning
-              </Text>
-              <Text style={{fontSize: 10, fontFamily: 'Roboto-Thin'}}>
-                before 10am
-              </Text>
-            </View>
-            {/* +++++++++++++++++++++++++ box 2 +++++++++++++  */}
-            <View
-              style={{
-                backgroundColor: theme.bgColorWhite,
-                width: '48%',
-                // height: 100,
-                elevation: 2,
-                borderRadius: 10,
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: 5,
-              }}>
-              <Image
-                source={require('../../../assets/icons/dawn.png')}
-                style={{width: 55, height: 55}}
-              />
+            {array.map((item, i) => {
+              // let loop = i.toString();
+              return (
+                <TouchableOpacity
+                  key={i}
+                  style={{
+                    backgroundColor: theme.bgColorWhite,
+                    width: '48%',
+                    padding: 5,
+                    elevation: 2,
+                    borderRadius: 10,
+                    borderWidth: change == i ? 1 : 0,
+                    borderColor: theme.bordersColor.darkOrangeB,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginVertical: 8,
+                  }}
+                  onPress={() => _Change(i)}>
+                  <Image source={item.image} style={{width: 55, height: 55}} />
 
-              <Text style={{fontSize: 13, fontFamily: 'Roboto-Regular'}}>
-                Mid Day
-              </Text>
-              <Text style={{fontSize: 10, fontFamily: 'Roboto-Thin'}}>
-                10am-2pm
-              </Text>
-            </View>
-          </View>
-          {/* +++++++++++++++++++++++++ Cente view row2 for icon +++++++++++++ */}
-          <View
-            style={{
-              //   width: '90%',
-              alignItems: 'center',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            {/* +++++++++++++++++++++++++ box 3 +++++++++++++  */}
-            <View
-              style={{
-                backgroundColor: theme.bgColorWhite,
-                width: '48%',
-                // height: 100,
-                padding: 5,
-                elevation: 2,
-                borderRadius: 10,
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginVertical: 15,
-              }}>
-              <Image
-                source={require('../../../assets/icons/sun.png')}
-                style={{width: 55, height: 55}}
-              />
-
-              <Text style={{fontSize: 13, fontFamily: 'Roboto-Regular'}}>
-                Afternoon
-              </Text>
-              <Text style={{fontSize: 10, fontFamily: 'Roboto-Thin'}}>
-                2pm-6pm
-              </Text>
-            </View>
-            {/* +++++++++++++++++++++++++ box 4 +++++++++++++  */}
-            <View
-              style={{
-                backgroundColor: theme.bgColorWhite,
-                width: '48%',
-                // height: 100,
-                padding: 5,
-                elevation: 2,
-                borderRadius: 10,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <Image
-                source={require('../../../assets/icons/half-moon.png')}
-                style={{
-                  width: 55,
-                  height: 55,
-                }}
-              />
-
-              <Text style={{fontSize: 13, fontFamily: 'Roboto-Regular'}}>
-                Evening
-              </Text>
-              <Text style={{fontSize: 10, fontFamily: 'Roboto-Thin'}}>
-                after-6pm
-              </Text>
-            </View>
+                  <Text style={{fontSize: 13, fontFamily: 'Roboto-Regular'}}>
+                    {item.title1}
+                  </Text>
+                  <Text style={{fontSize: 10, fontFamily: 'Roboto-Thin'}}>
+                    {item.title2}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
           </View>
         </View>
 
         {/* ++++++++++++++++++++ button ++++++++++++++++++++ */}
 
         <View style={{flex: 0.1, justifyContent: 'center'}}>
-          <GlobalButton title={'Continue'} />
-          {/* <View
-            style={{
-              backgroundColor: theme.globalButtonColor.background,
-              width: '70%',
-              marginVertical: 10,
-              borderRadius: 10,
-              height: 50,
-            }}>
-            <Text
-              style={{
-                alignSelf: 'center',
-                padding: 10,
-                fontSize: 16,
-                color: theme.textColors.white,
-              }}>
-              Continue
-            </Text>
-          </View> */}
-          <View></View>
+          <GlobalButton title={'Continue'} onPress={() => _Continue3()} />
         </View>
-      </ScrollView>
-    </ImageBackground>
+      </BgCustom>
+    </ScrollView>
   );
 };
 export default App;

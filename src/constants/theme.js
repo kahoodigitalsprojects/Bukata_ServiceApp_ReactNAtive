@@ -9,6 +9,7 @@ const theme = {
     borderColor: '#a0a0a0',
     lightBorder: '#e0e0e0',
     orangeBorder: '#fd9800',
+    darkOrangeB: '#e65100',
     lightYellow: '#f5e95b',
     brownBorder: '#c28656',
   },
@@ -34,9 +35,9 @@ const theme = {
 
   globalButtonColor: {
     background: '#ff9700',
-    textWhite: '#fffadd',
-    textOrange: '#de6e11',
-    borderOrange: '#de6e11',
+    textWhite: '#FFFFFF',
+    textOrange: '#e65100',
+    borderOrange: '#e65100',
   },
 
   facebookButtonColor: {
@@ -52,6 +53,7 @@ const theme = {
   iconsColor: {
     yellow: '#fe9601',
     orange: '#ec6f09',
+    darkOrange: '#e65100',
     gray: '#8b8b8b',
     black: '#000000',
     dark: '#202020',
