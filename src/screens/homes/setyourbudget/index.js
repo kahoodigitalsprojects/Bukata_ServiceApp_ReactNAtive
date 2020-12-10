@@ -5,6 +5,7 @@ import GloballButton from '../../../components/buttons/globalbutton';
 import BgCustom from '../../../components/bgcustom';
 import {theme} from '../../../constants/theme';
 import Toastmessage from '../../../components/toastmessage';
+import styles from './styles';
 
 const App = (props) => {
   const [color, setColor] = useState('');
@@ -28,35 +29,22 @@ const App = (props) => {
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <BgCustom {...props} name="Budget" suggest="Set Your">
+       
+      {/* ==============width 85%==============  */}
         <View
-          style={{
-            flex: 0.9,
-            width: '85%',
-            alignSelf: 'center',
-            // backgroundColor: 'pink',
-          }}>
+          style={styles.widthView}>
+          {/* ============budget============ */}
           <View
             style={{
               flexDirection: 'row',
             }}>
             <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: theme.iconsColor.darkOrange,
-                width: 22,
-                height: 22,
-                borderRadius: 25,
-              }}>
+              style={styles.iconView}>
               <Fontisto name="dollar" size={18} color="white" />
             </View>
             <View>
               <Text
-                style={{
-                  fontSize: 17,
-                  fontFamily: 'Roboto-Bold',
-                  color: theme.textColors.lightBlack,
-                }}>
+                style={styles.whatBudgettext}>
                 {'  '}What's your Budget?
               </Text>
             </View>
@@ -64,21 +52,16 @@ const App = (props) => {
 
           <View
             style={{
-              marginTop: 10,
-              borderBottomWidth: 1,
+            ...styles.offerView,
               borderColor: color
                 ? theme.bordersColor.darkOrangeB
                 : theme.bordersColor.borderColor,
             }}>
             <Text
-              style={{
-                color: theme.textColors.orange,
-                fontSize: 15,
-                fontFamily: 'Roboto-Regular',
-              }}>
+              style={styles.offerText}>
               Your Offer
             </Text>
-
+{/* ===============textinput============== */}
             <TextInput
               placeholder="0"
               placeholderTextColor={theme.textColors.placeholder}
@@ -88,31 +71,25 @@ const App = (props) => {
               }}
               onFocus={() => setColor(true)}
               onBlur={() => setColor(false)}
-              style={{fontSize: 18, marginLeft: 5}}
+              style={styles.Textinputbudget}
             />
           </View>
+          {/* ============warning============== */}
           <View
             style={{
-              alignItems: 'center',
-              marginVertical: 2,
+             ...styles.warningView,
               backgroundColor: isError ? '#ffeeee' : null,
-              borderRadius: 20,
             }}>
-            <Text style={{color: 'red', fontSize: 12}}>
+            <Text style={styles.warningText}>
               {isError ? 'Please Fill the Budget input' : null}
             </Text>
           </View>
         </View>
-
-        <View style={{flex: 0.1, width: '85%', alignSelf: 'center'}}>
+        {/* =================button 85%============ */}
+        <View style={styles.ButtonwidthView}>
+    {/* ===================button main view============== */}
           <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-evenly',
-              // paddingTop: 10,
-              // backgroundColor: 'blue',
-            }}>
+            style={styles.buttonmainView}>
             <GloballButton
               buttonTheme={'border'}
               title={'Preview'}

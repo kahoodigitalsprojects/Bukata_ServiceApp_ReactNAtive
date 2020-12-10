@@ -11,6 +11,7 @@ import {theme} from '../../../constants/theme';
 import BgCustom from '../../../components/bgcustom';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import GlobalButton from '../../../components/buttons/globalbutton';
+import styles from './styles';
 
 const App = (props) => {
   const [isPkgValue, setPkgValue] = useState('');
@@ -53,35 +54,16 @@ const App = (props) => {
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <BgCustom {...props} name="Package" suggest="Describe Your">
-        <View
-          style={{
-            flex: 0.9,
-            width: '85%',
-            alignSelf: 'center',
-            // backgroundColor: 'pink',
-          }}>
+        <View style={styles.borderView}>
           {/*========== Describe Package ==========*/}
 
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: 10,
-            }}>
+          <View style={styles.describepackageViewrow}>
             <MaterialCommunityIcons
               name="shopping"
               size={25}
               color={theme.iconsColor.darkOrange}
             />
-            <Text
-              style={{
-                fontSize: 17,
-                color: theme.textColors.lightBlack,
-                fontFamily: 'Roboto-Bold',
-                marginLeft: 8,
-              }}>
-              Describe Package
-            </Text>
+            <Text style={styles.describeviewText}>Describe Package</Text>
           </View>
 
           <TextInput
@@ -92,64 +74,39 @@ const App = (props) => {
             }}
             onFocus={() => setColor(true)}
             onBlur={() => setColor(false)}
-            style={{
-              fontSize: 14,
-              color: theme.textColors.black,
-              marginBottom: 20,
-            }}></TextInput>
+            style={styles.describeTextinput}></TextInput>
 
           <View
             style={{
-              borderWidth: 0.5,
+              ...styles.describeborder,
               borderColor: color
                 ? theme.bordersColor.darkOrangeB
                 : theme.bordersColor.borderColor,
-              marginVertical: 2,
             }}></View>
           <View
             style={{
-              alignItems: 'center',
-              backgroundColor:  isError ?'#ffeeee' : null,
-              borderRadius: 20,
-              marginBottom: 10,
+              backgroundColor: isError ? '#ffeeee' : null,
+              ...styles.describewarningView,
             }}>
-            <Text style={{color: 'red', fontSize: 12}}>
+            <Text style={styles.warningText}>
               {isError ? 'Please Describe Package correctly' : null}
             </Text>
           </View>
 
           {/*========== Package Weight Row ==========*/}
 
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginVertical: 15,
-              marginTop: 25,
-            }}>
+          <View style={styles.packageweightMainview}>
             <MaterialCommunityIcons
               name="speedometer"
               size={25}
               color={theme.iconsColor.darkOrange}
             />
-            <Text
-              style={{
-                fontSize: 17,
-                color: theme.textColors.lightBlack,
-                fontFamily: 'Roboto-Bold',
-                marginLeft: 8,
-              }}>
-              Package Weight
-            </Text>
+            <Text style={styles.packageweightText}>Package Weight</Text>
           </View>
 
           {/* ==========Packages Box Row========== */}
 
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
+          <View style={styles.packageboxMainview}>
             {/* ========== box 1 ========== */}
 
             {isPackages.map((item, i) => {
@@ -161,31 +118,17 @@ const App = (props) => {
                     _Pchange(i);
                   }}
                   style={{
-                    width: '30%',
-                    // height: 130,
-                    padding: 15,
-                    backgroundColor: theme.bgColorWhite,
-                    elevation: 0.5,
-                    borderRadius: 10,
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                  ...styles.touchableimage,
                     borderWidth: Packagechange == i ? 1 : 0,
-                    borderColor: theme.bordersColor.darkOrangeB,
                   }}>
                   <Image
                     source={item.Image}
-                    style={{
-                      width: 62,
-                      height: 62,
-                    }}
+                    style={styles.touchableimages}
                   />
                   <View
-                    style={{alignItems: 'center', justifyContent: 'center'}}>
+                    style={styles.touchableTextview}>
                     <Text
-                      style={{
-                        fontSize: 14,
-                        fontFamily: 'Roboto-Regular',
-                      }}>
+                      style={styles.TouchableText}>
                       {item.title}
                     </Text>
                   </View>
@@ -198,12 +141,7 @@ const App = (props) => {
         {/* ==========Button========== */}
 
         <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            flex: 0.1,
-            marginVertical: 10,
-          }}>
+          style={styles.ButtonMainview}>
           <GlobalButton title={'Continue'} onPress={() => _Continue2()} />
         </View>
       </BgCustom>

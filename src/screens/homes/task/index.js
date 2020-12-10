@@ -6,13 +6,13 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import Header from '../../../components/header';
 import {theme} from '../../../constants/theme';
 import DropDownPicker from 'react-native-dropdown-picker';
+import styles from './styles';
 const Task = (props) => {
   function _Click(item) {
     props.navigation.navigate('taskdetail', {selectedTask: item});
   }
   const [country, setCountry] = useState('');
   const [isVisibleA, setisVisibleA] = useState(false);
-  // const [selectedValue, setSelectedValue] = useState('Sort By');
   const [array, setArray] = useState([
     {
       Price: '1200',
@@ -61,28 +61,14 @@ const Task = (props) => {
 
         <View style={{width: '90%', alignSelf: 'center'}}>
           <View
-            style={{
-              alignItems: 'center',
-              marginVertical: 20,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
+            style={styles.maincontainerview}>
             <Text
-              style={{
-                fontSize: 18,
-                fontFamily: 'Roboto-Bold',
-                // fontWeight: '900',
-              }}>
+              style={styles.maincontainerText}>
               3 Tasks Available
             </Text>
 
             <View
-              style={{
-                // backgroundColor: 'skyblue',
-                width: '37%',
-                // marginVertical: 50,
-                // zIndex: 9999,
-              }}>
+              style={styles.dropdown}>
               <DropDownPicker
                 items={[
                   {label: 'Name', value: 'name'},
@@ -93,67 +79,8 @@ const Task = (props) => {
                 placeholder="Sort By"
                 defaultValue={country}
                 style={{borderWidth: 1, elevation: 1}}
-                // isVisible={isVisibleA}
-                // onOpen={() => setisVisibleA(true) }
-                // onClose={() => setisVisibleA(false) }
                 onChangeItem={(item) => setCountry(item.value)}
               />
-              {/* <DropDownPicker
-                items={[
-                  {
-                    label: 'Name',
-                    value: 'name',
-                    
-                  },
-                  {
-                    label: 'Item',
-                    value: 'item',
-                  },
-                  {
-                    label: 'DateModified',
-                    value: 'Datemodified',
-                  },
-                ]}
-                placeholder="Sort"
-                defaultValue={country}
-               
-           
-                containerStyle={{height: 40}}
-                style={{backgroundColor: '#FFF', elevation: 0, borderWidth: 0}}
-                itemStyle={{
-                  justifyContent: 'flex-start',
-                }}
-                labelStyle={{}}
-                dropDownStyle={{}}
-                onChangeItem={item => console.log("Ss=====s",item) }
-              /> */}
-
-              {/* <Picker
-                selectedValue={selectedValue}
-                style={{height: 50, width: 120}}
-                onValueChange={(itemValue, itemIndex) =>
-                  setSelectedValue(itemValue)
-                }>
-                <Picker.Item label="Sort By" value="java" />
-                <Picker.Item label="Name" value="java" />
-                <Picker.Item label="Size" value="js" />
-                <Picker.Item label="Item Type" Item Type="java" />
-                <Picker.Item label="Date Modified" value="java" />
-              </Picker> */}
-
-              {/* <Text style={{color: theme.textColors.black}}>Sort by</Text>
-
-              <AntDesign
-                name="caretdown"
-                size={12}
-                color={theme.iconsColor.black}
-                style={{
-                  height: 20,
-                  width: 20,
-                  marginLeft: 3,
-                  padding: 2,
-                }}
-              /> */}
             </View>
           </View>
         </View>
@@ -165,43 +92,18 @@ const Task = (props) => {
             <TouchableOpacity
               onPress={() => _Click(item)}
               key={i}
-              style={{
-                elevation: 1.5,
-                backgroundColor: theme.taskColors.bgColorWhite,
-                width: '90%',
-                borderRadius: 10,
-                alignSelf: 'center',
-                // height: 200,
-                padding: 5,
-                marginVertical: 10,
-              }}>
+              style={styles.touchableview}>
               {/* ++++++++++++++++++ profile main View +++++++++++++++++++++++++ */}
               <View
-                style={{
-                  flexDirection: 'row',
-                  margin: 4,
-                  alignItems: 'center',
-                  width: '95%',
-                  justifyContent: 'space-between',
-                }}>
+                style={styles.profilemainview}>
+
                 {/* ++++++++++++++++++ profile Image view+++++++++++++++++++++++++ */}
 
-                <View style={{flexDirection: 'row', margin: 5}}>
+                <View style={styles.profileimgviewview}>
                   <View
-                    style={{
-                      marginVertical: 5,
-                      backgroundColor: theme.taskColors.profileBG,
-                      width: 50,
-                      height: 50,
-                      borderRadius: 100,
-                    }}>
+                    style={styles.profileIcon}>
                     <Text
-                      style={{
-                        alignSelf: 'center',
-                        marginTop: 12,
-                        fontSize: 18,
-                        color: theme.globalButtonColor.textWhite,
-                      }}>
+                      style={styles.profileimgtext}>
                       {item.fname}
                     </Text>
                   </View>
@@ -210,16 +112,11 @@ const Task = (props) => {
 
                   <View style={{marginLeft: 10}}>
                     <Text
-                      style={{
-                        marginTop: 18,
-                        // fontWeight: 'bold',
-                        fontFamily: 'Roboto-Bold',
-                        color: theme.textColors.black,
-                      }}>
+                      style={styles.profiletext}>
                       {item.name}
                     </Text>
                     <Text
-                      style={{fontSize: 12, color: theme.textColors.darkGray}}>
+                      style={styles.requestText}>
                       {item.request}
                     </Text>
                   </View>
@@ -227,23 +124,13 @@ const Task = (props) => {
 
                 {/* ++++++++++++++++++Price View +++++++++++++++++++++++++ */}
 
-                <View style={{}}>
+                <View>
                   <Text
-                    style={{
-                      color: theme.textColors.orange,
-                      fontSize: 18,
-                      fontFamily: 'Roboto-Bold',
-                      //   fontWeight: 'bold',
-                    }}>
+                    style={styles.priceText}>
                     {item.Price}
                   </Text>
                   <Text
-                    style={{
-                      fontSize: 12,
-                      paddingLeft: 5,
-                      fontFamily: 'Roboto-Thin',
-                      color: theme.textColors.black,
-                    }}>
+                    style={styles.heavyText}>
                     Heavy
                   </Text>
                 </View>
@@ -251,75 +138,36 @@ const Task = (props) => {
 
               {/* ==========  yellow dot Row ========== */}
               <View
-                style={{
-                  width: '100%',
-                  marginBottom: 10,
-                }}>
+                style={styles.view1}>
                 <View
-                  style={{
-                    flexDirection: 'row',
-                    width: '90%',
-                    alignItems: 'center',
-                  }}>
-                  <View style={{width: 40, alignItems: 'flex-end'}}>
+                  style={styles.view2}>
+                  <View style={styles.view3}>
                     <View
-                      style={{
-                        width: 9,
-                        height: 9,
-                        backgroundColor: theme.taskColors.circleLight,
-                        borderRadius: 12,
-                      }}></View>
+                      style={styles.yellowDot}></View>
                   </View>
                   <Text
-                    style={{
-                      marginLeft: 10,
-                      fontSize: 14,
-                      width: '100%',
-                      color: theme.textColors.black,
-                    }}>
+                    style={styles.yellowDottext}>
                     {item.adress}
                   </Text>
                 </View>
 
                 {/* ++++++++++++++++ midele small border +++++++++++++++ */}
-                <View style={{width: 46, alignItems: 'flex-end'}}>
+                <View style={styles.view4}>
                   <View
-                    style={{
-                      width: 11,
-                      height: 14,
-                      borderLeftWidth: 0.3,
-                      marginLeft: 4,
-                      marginBottom: 2,
-                      borderColor: theme.taskColors.circleDark,
-                    }}></View>
+                    style={styles.view5}></View>
                 </View>
 
                 {/* ========== Orange dot Row ========== */}
                 <View
-                  style={{
-                    flexDirection: 'row',
-                    width: '90%',
-                    alignItems: 'center',
-                  }}>
-                  <View style={{width: 40, alignItems: 'flex-end'}}>
+                  style={styles.view6}>
+                  <View style={styles.view7}>
                     <View
-                      style={{
-                        width: 9,
-                        height: 9,
-                        backgroundColor: theme.bordersColor.orangeBorder,
-                        borderRadius: 12,
-                      }}
+                      style={styles.view8}
                     />
                   </View>
 
                   <Text
-                    style={{
-                      marginLeft: 10,
-                      fontSize: 14,
-                      marginTop: 0,
-                      //   width: '100%',
-                      color: theme.textColors.black,
-                    }}>
+                    style={styles.orangedot}>
                     {item.street}
                   </Text>
                 </View>
@@ -328,45 +176,23 @@ const Task = (props) => {
               {/* ++++++ main view for date and time +++++++ */}
 
               <View
-                style={{
-                  borderTopWidth: 0.4,
-                  borderColor: theme.bordersColor.borderColor,
-                  flexDirection: 'row',
-                  alignSelf: 'center',
-                  width: '90%',
-                  justifyContent: 'space-between',
-                  //   margin: 5,
-                }}>
+                style={styles.datetimemainview1}>
                 <View
-                  style={{
-                    flexDirection: 'row',
-                    marginVertical: 7,
-                    // backgroundColor: 'red',
-                    alignItems: 'center',
-                  }}>
+                  style={styles.datetimemainview2}>
                   <View>
                     <Entypo
                       name="calendar"
                       size={18}
                       color={theme.iconsColor.orange}
-                      style={{}}
                     />
                   </View>
                   <Text
-                    style={{
-                      fontSize: 12,
-                      padding: 5,
-                      color: theme.textColors.black,
-                    }}>
+                    style={styles.daytext}>
                     {item.day}
                   </Text>
                 </View>
                 <View
-                  style={{
-                    flexDirection: 'row',
-                    // backgroundColor: 'red',
-                    alignItems: 'center',
-                  }}>
+                  style={styles.iconview}>
                   <View>
                     <AntDesign
                       name="clockcircleo"
@@ -376,11 +202,7 @@ const Task = (props) => {
                     />
                   </View>
                   <Text
-                    style={{
-                      fontSize: 12,
-                      padding: 5,
-                      color: theme.textColors.black,
-                    }}>
+                    style={styles.datetext}>
                     {item.date}
                   </Text>
                 </View>

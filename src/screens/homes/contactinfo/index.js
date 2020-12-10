@@ -5,6 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import BgCustom from '../../../components/bgcustom';
 import GlobalButton from '../../../components/buttons/globalbutton';
 import Toastmessage from '../../../components/toastmessage';
+import styles from './styles'
 
 const App = (props) => {
   const [name, setName] = useState('');
@@ -34,50 +35,31 @@ const App = (props) => {
         {/* ==========2nd Flex========== */}
 
         <View
-          style={{
-            flex: 0.9,
-            // backgroundColor: 'green',
-            width: '85%',
-            alignSelf: 'center',
-          }}>
+          style={styles.secondflexView}>
           <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginBottom: 10,
-            }}>
+            style={styles.reciverIcon}>
             <Ionicons
               name="person-outline"
               size={25}
               color={theme.iconsColor.darkOrange}
             />
             <Text
-              style={{
-                fontSize: 17,
-                marginLeft: 5,
-                color: theme.textColors.lightBlack,
-                fontFamily: 'Roboto-Bold',
-              }}>
+              style={styles.recieverText}>
               Receiver Details
             </Text>
           </View>
 
           <View
             style={{
-              borderBottomWidth: 1,
+              ...styles.recieverborder,
               borderColor: color
                 ? theme.bordersColor.darkOrangeB
                 : theme.bordersColor.borderColor,
 
-              marginBottom: 2,
             }}>
             <View>
               <Text
-                style={{
-                  color: theme.textColors.orange,
-                  fontFamily: 'Roboto-Thin',
-                  fontSize: 15,
-                }}>
+                style={styles.recievernameText}>
                 Receiver Name
               </Text>
 
@@ -89,39 +71,30 @@ const App = (props) => {
                 }}
                 onFocus={() => setColor(true)}
                 onBlur={() => setColor(false)}
-                style={{fontSize: 14, marginLeft: 5}}
+                style={styles.Textinputuser}
               />
             </View>
           </View>
           <View
             style={{
-              alignItems: 'center',
-              marginBottom: 10,
+              ...styles.warningborder,
               backgroundColor: isError ? '#ffeeee' : null,
-              borderRadius: 20,
             }}>
-            <Text style={{color: 'red', fontSize: 12}}>
+            <Text style={styles.warningtext}>
               {isError ? '* Please Fill the Name Input' : null}
             </Text>
           </View>
-
+{/* ====================phonenumber=============== */}
           <View
             style={{
-              borderBottomWidth: 1,
-              // backgroundColor: 'red',
+             ...styles.phonenumberBorder,
               borderColor: color2
                 ? theme.bordersColor.darkOrangeB
                 : theme.bordersColor.borderColor,
-              marginVertical: 2,
             }}>
             <View>
               <Text
-                style={{
-                  color: theme.textColors.orange,
-                  fontFamily: 'Roboto-Thin',
-                  fontSize: 14,
-                  marginTop: 10,
-                }}>
+                style={styles.phonenumberText}>
                 Receiver Phone Number
               </Text>
 
@@ -134,18 +107,13 @@ const App = (props) => {
                 }}
                 onFocus={() => setColor2(true)}
                 onBlur={() => setColor2(false)}
-                style={{fontSize: 14, marginLeft: 5}}
+                style={styles.phonenumberTextinput}
               />
             </View>
           </View>
           <View
-            style={{
-              alignItems: 'center',
-              marginBottom: 10,
-              backgroundColor: isError2 ? '#ffeeee' : null,
-              borderRadius: 20,
-            }}>
-            <Text style={{color: 'red', fontSize: 12}}>
+            style={styles.warningPhonenumerView}>
+            <Text style={styles.warningphonenumberText}>
               {isError2 ? '* Please Fill the Number Input' : null}
             </Text>
           </View>
@@ -154,13 +122,7 @@ const App = (props) => {
         {/* // ++++++++++++++++++++++++ Button View++++++++++++++++++ */}
 
         <View
-          style={{
-            flex: 0.1,
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            marginVertical: 10,
-            // backgroundColor: 'pink',
-          }}>
+          style={styles.buttonview}>
           <GlobalButton title={'Continue'} onPress={() => _Continue4()} />
         </View>
       </BgCustom>

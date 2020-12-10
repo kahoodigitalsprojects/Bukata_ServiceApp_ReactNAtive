@@ -4,6 +4,7 @@ import GlobalButton from '../../../components/buttons/globalbutton';
 import BgCustom from '../../../components/bgcustom';
 
 import {theme} from '../../../constants/theme';
+import styles from './styles';
 
 const App = (props) => {
   function _Done() {
@@ -15,44 +16,22 @@ const App = (props) => {
         {/* ========== Text View ========== */}
 
         <View
-          style={{
-            flex: 0.8,
-            // backgroundColor: 'pink',
-            alignItems: 'center',
-            width: '85%',
-
-            alignSelf: 'center',
-          }}>
+          style={styles.textmainView}>
           <View style={{marginVertical: 25}}>
             <Text
-              style={{
-                fontSize: 30,
-                fontWeight: 'bold',
-                color: theme.textColors.orange,
-              }}>
+              style={styles.SuccessText}>
               SUCCESS
             </Text>
           </View>
-          <View style={{marginVertical: 10, marginBottom: 20}}>
+          <View style={styles.spacebetween}>
             <Text
-              style={{
-                fontSize: 19,
-                textAlign: 'center',
-                fontFamily: 'Roboto-Bold',
-                fontWeight: 'bold',
-                color: theme.textColors.black,
-              }}>
+              style={styles.thankyouText}>
               Thank you for{'\n'}your Reservation!
             </Text>
           </View>
           <View>
             <Text
-              style={{
-                fontSize: 17,
-                textAlign: 'center',
-                //   fontWeight: 'bold',
-                color: theme.textColors.black,
-              }}>
+              style={styles.detailText}>
               Your request has been published{'\n'}and you will be notified if
               anyone{'\n'}accepts the offer
             </Text>
@@ -60,15 +39,7 @@ const App = (props) => {
         </View>
         {/* +++++++++++++++++++ button View ++++++++++++++++++ */}
         <View
-          style={{
-            flex: 0.3,
-            //   backgroundColor: 'yellow',
-            alignItems: 'center',
-            width: '85%',
-            justifyContent: 'center',
-            alignSelf: 'center',
-            marginVertical: 10,
-          }}>
+          style={styles.ButtonView}>
           <GlobalButton
             buttonTheme={'border'}
             title={'DONE'}

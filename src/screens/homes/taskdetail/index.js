@@ -5,6 +5,7 @@ import Header from '../../../components/header';
 import {theme} from '../../../constants/theme';
 import Toast from 'react-native-toast-message';
 import Toastmessage from '../../../components/toastmessage';
+import styles from './styles';
 
 const App = (props) => {
   const [color, setColor] = useState('');
@@ -34,88 +35,41 @@ const App = (props) => {
         //   drawerIcon={true}
       />
       <View
-        style={{
-          flex: 0.22,
-          // backgroundColor: 'green',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
+        style={styles.mainview}>
         {/* ========== first row for profile ========== */}
 
         <View
-          style={{
-            flexDirection: 'row',
-            width: '90%',
-            marginBottom: 10,
-          }}>
+          style={styles.firstrowview1}>
           <View
-            style={{
-              backgroundColor: theme.secondaryColor,
-              width: 70,
-              height: 70,
-              borderRadius: 100,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
+            style={styles.textView}>
             <Text
-              style={{
-                color: theme.textColors.white,
-                fontSize: 20,
-                fontFamily: 'Roboto-Bold',
-              }}>
+              style={styles.profiletext}>
               J
             </Text>
           </View>
           <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              paddingLeft: 10,
-            }}>
+            style={styles.profilenameview}>
             <Text
-              style={{
-                fontSize: 17,
-                // fontWeight: 'bold',
-                fontFamily: 'Roboto-Bold',
-                color: theme.textColors.black,
-              }}>
+              style={styles.profileText}>
               {item.name}
             </Text>
             <Text
-              style={{
-                fontSize: 14,
-                color: theme.textColors.gray,
-                fontFamily: 'Roboto-Thin',
-              }}>
+              style={styles.requesttext}>
               15 Request{' '}
             </Text>
           </View>
         </View>
+        {/* =============dots view=========== */}
         <View
-          style={{
-            width: '90%',
-            marginVertical: 10,
-            borderBottomWidth: 1,
-            borderColor: theme.bordersColor.lightBorder,
-          }}>
+          style={styles.dotmainview}>
+         {/* ===========   yellow============== */}
           <View style={{flexDirection: 'row'}}>
             <View
-              style={{
-                width: 10,
-                height: 10,
-                backgroundColor: theme.bordersColor.lightYellow,
-                borderRadius: 10,
-              }}></View>
+              style={styles.yellowdot}></View>
             <View>
               {/* ++++++++++++++++++yellow dot text View +++++++++++++++++++++++++ */}
               <Text
-                style={{
-                  paddingLeft: 10,
-                  fontSize: 14,
-                  marginTop: -5,
-                  fontFamily: 'Roboto-Regular',
-                  color: theme.textColors.black,
-                }}>
+                style={styles.yellowdottext}>
                 First Gate Dadinkowa
               </Text>
             </View>
@@ -124,35 +78,17 @@ const App = (props) => {
 
           <View style={{flexDirection: 'row'}}>
             <View
-              style={{
-                width: 11,
-                height: 14,
-                borderLeftWidth: 0.3,
-                marginLeft: 4,
-                marginBottom: 2,
-                borderColor: theme.bordersColor.borderColor,
-              }}></View>
+              style={styles.borderView}></View>
           </View>
           {/* +++++++++++++++++++++++ orange dot view ++++++++++++++++++++ */}
           <View style={{flexDirection: 'row'}}>
             <View
-              style={{
-                width: 10,
-                height: 10,
-                backgroundColor: theme.bordersColor.orangeBorder,
-                borderRadius: 10,
-              }}></View>
+              style={styles.orangedot}></View>
 
             {/* +++++++++++++++++++++++ orangr text view ++++++++++++++++++++ */}
             <View style={{marginBottom: 30}}>
               <Text
-                style={{
-                  paddingLeft: 10,
-                  fontSize: 14,
-                  marginTop: -5,
-                  color: theme.textColors.black,
-                  fontFamily: 'Roboto-Regular',
-                }}>
+                style={styles.orangetext}>
                 Mees Palace Rayfield
               </Text>
             </View>
@@ -161,53 +97,35 @@ const App = (props) => {
 
         <View style={{width: '90%', marginTop: 20}}>
           <Text
-            style={{color: theme.textColors.black, fontFamily: 'Roboto-Bold'}}>
+            style={styles.packagedes}>
             Package Description
           </Text>
           <Text
-            style={{
-              color: theme.textColors.orange,
-              marginVertical: 6,
-              fontFamily: 'Roboto-Bold',
-            }}>
+            style={styles.weightdes}>
             Weight:
             <Text>Heavy</Text>
           </Text>
         </View>
         {/* ++++++++++++++++++paragraph view++++++++++++++++ */}
-        <View style={{width: '90%', marginVertical: 10}}>
+        <View style={styles.paraview}>
           <Text
-            style={{
-              color: theme.textColors.darkGray,
-              fontFamily: 'Roboto-Regular',
-            }}>
+            style={styles.packagedescription}>
             3 cartons of indome noodles to be deliverd to mees place kitchen
           </Text>
         </View>
-        <View
-          style={{
-            width: '90%',
-            backgroundColor: theme.bgColorWhite,
-            alignItems: 'center',
-            elevation: 2,
-            borderRadius: 12,
-            marginVertical: 5,
-            overflow: 'hidden',
-          }}>
+       {/* ==========offerview=========== */}
+       <View
+          style={styles.offerview1}>
           <View
             style={{
+              ...styles.makeofferview,
               backgroundColor: color
                 ? theme.bordersColor.orangeBorder
                 : theme.taskColors.makeOfferBG,
-              width: '100%',
-              alignItems: 'center',
             }}>
             <Text
-              style={{
-                borderTopStartRadius: 12,
-                padding: 5,
+              style={{...styles.makeoffertext,
                 color: color ? '#FFF' : '#000',
-                fontFamily: 'Roboto-Regular',
               }}>
               MAKE OFFER
             </Text>
@@ -222,18 +140,16 @@ const App = (props) => {
             }}
             onFocus={() => setColor(true)}
             onBlur={() => setColor(false)}
-            style={{fontSize: 20, height: 60, fontWeight: 'bold'}}
+            style={styles.offertextinput}
           />
         </View>
+        {/* ============warning========== */}
         <View
           style={{
-            alignItems: 'center',
-            // marginBottom: 10,
-            width: '80%',
+           ...styles.warningview,
             backgroundColor: isError ? '#ffeeee' : null,
-            borderRadius: 20,
           }}>
-          <Text style={{color: 'red', fontSize: 12}}>
+          <Text style={styles.warningtext}>
             {isError ? 'Please Fill Input Correctly' : null}
           </Text>
         </View>
@@ -242,13 +158,7 @@ const App = (props) => {
       {/*++++++++++++++++ last button View++++++++++++++++ */}
 
       <View
-        style={{
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          //   backgroundColor: 'pink',
-          flex: 0.9,
-          marginVertical: 10,
-        }}>
+        style={styles.buttonview}>
         <GlobalButton title={'Send Request'} onPress={() => _Send()} />
       </View>
       {/* ========== Toast Message ========== */}

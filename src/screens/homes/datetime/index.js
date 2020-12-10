@@ -15,6 +15,7 @@ import BgCustom from '../../../components/bgcustom';
 import GlobalButton from '../../../components/buttons/globalbutton';
 import moment from 'moment';
 import Toast from 'react-native-toast-message';
+import styles from './styles';
 const App = (props) => {
   function _Continue3() {
     props.navigation.navigate('contactinfo');
@@ -80,29 +81,15 @@ const App = (props) => {
         {/* ========Second Flex ======== */}
 
         <View
-          style={{
-            width: '85%',
-            flex: 0.9,
-            // justifyContent: 'center',
-            // alignItems: 'center',
-            alignSelf: 'center',
-          }}>
+          style={styles.mainView}>
           {/* ==========Date & Time Row========== */}
 
           <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}>
+            style={styles.datetimeRowview}>
             <Entypo name="calendar" color={theme.iconsColor.orange} size={25} />
 
             <Text
-              style={{
-                fontSize: 17,
-                marginLeft: 10,
-                fontFamily: 'Roboto-Bold',
-                color: theme.textColors.lightBlack,
-              }}>
+              style={styles.setdatetimeText}>
               Set Date & Time
             </Text>
           </View>
@@ -110,25 +97,12 @@ const App = (props) => {
           {/* ========== Date & Time Code ========== */}
 
           <View
-            style={{
-              backgroundColor: theme.chooseDateBG,
-              width: '100%',
-              marginVertical: 12,
-              borderRadius: 0,
-              elevation: 1,
-              alignSelf: 'center',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
+            style={styles.datetimecodeMainView}>
             <View style={{justifyContent: 'center', paddingLeft: 7}}>
               <Text>{`${moment(date).format(' dddd, DD MMM YYYY')}`}</Text>
             </View>
             <TouchableOpacity
-              style={{
-                justifyContent: 'center',
-                padding: 10,
-                // backgroundColor: 'pink',
-              }}
+              style={styles.DropDownIcon}
               onPress={showDatepicker}>
               <AntDesign
                 name="caretdown"
@@ -155,12 +129,7 @@ const App = (props) => {
           {/* ========== Box Row Wrap ==========  */}
 
           <View
-            style={{
-              alignItems: 'center',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              justifyContent: 'space-between',
-            }}>
+            style={styles.BoxRowwrapMainView}>
             {/* ========== Box with Map ==========  */}
 
             {array.map((item, i) => {
@@ -169,24 +138,16 @@ const App = (props) => {
                 <TouchableOpacity
                   key={i}
                   style={{
-                    backgroundColor: theme.bgColorWhite,
-                    width: '48%',
-                    padding: 5,
-                    elevation: 2,
-                    borderRadius: 10,
+                    ...styles.boxView,
                     borderWidth: change == i ? 1 : 0,
-                    borderColor: theme.bordersColor.darkOrangeB,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginVertical: 8,
                   }}
                   onPress={() => _Change(i)}>
-                  <Image source={item.image} style={{width: 55, height: 55}} />
+                  <Image source={item.image} style={styles.ImageMap} />
 
-                  <Text style={{fontSize: 13, fontFamily: 'Roboto-Regular'}}>
+                  <Text style={styles.title1}>
                     {item.title1}
                   </Text>
-                  <Text style={{fontSize: 10, fontFamily: 'Roboto-Thin'}}>
+                  <Text style={styles.title2}>
                     {item.title2}
                   </Text>
                 </TouchableOpacity>
@@ -197,7 +158,7 @@ const App = (props) => {
 
         {/* ++++++++++++++++++++ button ++++++++++++++++++++ */}
 
-        <View style={{flex: 0.1, justifyContent: 'center'}}>
+        <View style={styles.ButtonVIew}>
           <GlobalButton title={'Continue'} onPress={() => _Continue3()} />
         </View>
       </BgCustom>

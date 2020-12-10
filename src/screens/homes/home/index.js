@@ -12,6 +12,7 @@ import {theme} from '../../../constants/theme';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {SliderBox} from 'react-native-image-slider-box';
 import Header from '../../../components/header';
+import styles from './styles';
 console.log('theame');
 
 const App = (props) => {
@@ -43,7 +44,7 @@ const App = (props) => {
         />
         {/* ==========Slider========== */}
 
-        <View style={{flex: 0.5, justifyContent: 'flex-end', width: '100%',}}>
+        <View style={styles.sliderMainView}>
           <SliderBox
             images={images}
             // parentWidth={Dimensions.get('window').width / 1}
@@ -57,19 +58,8 @@ const App = (props) => {
             // disableOnPress={true}
             resizeMode={'contain'}
             resizeMethod={'resize'}
-            paginationBoxStyle={{
-              bottom: 0,
-              padding: 0,
-              alignItems: 'center',
-              alignSelf: 'center',
-              justifyContent: 'center',
-            }}
-            ImageComponentStyle={{
-              borderRadius: 15,
-              backgroundColor: 'transparent',
-              width: '100%',
-              backgroundColor: 'white',
-            }}
+            paginationBoxStyle={styles.paginationBoxStyleS}
+            ImageComponentStyle={styles.imagecomponentstyles}
             imageLoadingColor="#FFF"
           />
         </View>
@@ -87,13 +77,7 @@ const App = (props) => {
               flexDirection: 'row',
             }}>
             <View
-              style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: 60,
-                width: 50,
-                marginLeft: 20,
-              }}>
+              style={styles.rigtharrowview}>
               <AntDesign
                 name="right"
                 size={22}
@@ -102,19 +86,11 @@ const App = (props) => {
             </View>
             <View style={{justifyContent: 'center'}}>
               <Text
-                style={{
-                  color: theme.textColors.orange,
-                  fontFamily: 'Roboto-Thin',
-                }}>
+                style={styles.TextrowText}>
                 What do you
               </Text>
               <Text
-                style={{
-                  color: theme.textColors.orange,
-                  fontFamily: 'Roboto-Bold',
-                  fontSize: 25,
-                  // fontWeight: '900',
-                }}>
+                style={styles.TextrowText2}>
                 want to do
               </Text>
             </View>
@@ -123,72 +99,30 @@ const App = (props) => {
           {/* ==========Boxes========== */}
 
           <View
-            style={{
-              flexDirection: 'row',
-              width: '85%',
-              alignSelf: 'center',
-              justifyContent: 'space-around',
-            }}>
+            style={styles.BoxesMainview}>
+              {/* ================box1=========== */}
             <TouchableOpacity
               onPress={() => _Send()}
-              style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 15,
-                height: 160,
-                width: 140,
-                backgroundColor: theme.secondaryColor,
-              }}>
+              style={styles.touchBox1}>
               <Image
                 source={require('../../../assets/images/package.png')}
-                style={{height: 80, width: 80}}
+                style={styles.touchbox1image}
               />
               <Text
-                style={{
-                  color: theme.textColors.white,
-                  fontFamily: 'Roboto-Bold',
-                  fontWeight: 'bold',
-                  fontSize: 18,
-                  textAlign: 'center',
-                  letterSpacing: 0.5,
-                  marginTop: 8,
-                }}>
+                style={styles.touchbox1Text}>
                 Send {'\n'}Package
               </Text>
             </TouchableOpacity>
-
+            {/* ===========box2=========== */}
             <TouchableOpacity
               onPress={() => _Deliver()}
-              style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 15,
-                height: 160,
-                width: 140,
-                backgroundColor: theme.primaryColor,
-                // shadowColor: 'rgba(255, 0, 255, 1.0)',
-                // shadowOffset: {
-                //   width: 0,
-                //   height: 10,
-                // },
-                // shadowOpacity: 0.51,
-                // shadowRadius: 13.16,
-                // elevation: 20,
-              }}>
+              style={styles.touchbox2}>
               <Image
                 source={require('../../../assets/images/box.png')}
-                style={{height: 80, width: 80}}
+                style={styles.touchbox2image}
               />
               <Text
-                style={{
-                  color: theme.textColors.white,
-                  fontFamily: 'Roboto-Bold',
-                  fontWeight: 'bold',
-                  fontSize: 18,
-                  textAlign: 'center',
-                  letterSpacing: 0.5,
-                  marginTop: 8,
-                }}>
+                style={styles.touchbox2text}>
                 Deliver {'\n'}Package
               </Text>
             </TouchableOpacity>

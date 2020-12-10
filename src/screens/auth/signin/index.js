@@ -14,6 +14,7 @@ import FacebookButton from '../../../components/buttons/facebookbutton';
 import GmailButton from '../../../components/buttons/gmailbutton';
 import Header from '../../../components/header';
 import Toastmessage from '../../../components/toastmessage';
+import styles from './styles';
 let path = '../../../assets/images/bg6.png';
 
 const App = (props) => {
@@ -50,24 +51,16 @@ const App = (props) => {
 
   const _CreateAccount = () => {
     return (
-      <View
-        style={{
-          flex: 0.35,
-          // backgroundColor: 'green',
-          width: '90%',
-          alignSelf: 'center',
-        }}>
+      <View style={styles.flexView}>
+        {/* ==========name and textinputname========= */}
         <View
           style={{
-            borderBottomWidth: 1,
-            width: '100%',
-            alignSelf: 'center',
-            marginTop: 20,
+            ...styles.nameview,
             borderColor: color
               ? theme.bordersColor.darkOrangeB
               : theme.bordersColor.borderColor,
           }}>
-          <Text style={{color: theme.textColors.yellow}}>Full Name</Text>
+          <Text style={styles.fullnametext}>Full Name</Text>
           <TextInput
             placeholder={'Abdul Samad'}
             onChangeText={(nameText) => {
@@ -77,17 +70,11 @@ const App = (props) => {
             onBlur={() => setColor(false)}
           />
         </View>
-        <Text
-          style={{
-            color: theme.textColors.lightYellow,
-            marginTop: 20,
-          }}>
-          Phone Number
-        </Text>
+        <Text style={styles.phonetext}>Phone Number</Text>
         {/* =========Number Input========= */}
-        <View style={{width: '100%', alignSelf: 'center', height: 70}}>
+        <View style={styles.numberinputView}>
           {showMessage && (
-            <View style={{}}>
+            <View>
               <Text>Value : {value}</Text>
               <Text>Formatted Value : {formattedValue}</Text>
               <Text>Valid : {valid ? 'true' : 'false'}</Text>
@@ -98,30 +85,23 @@ const App = (props) => {
             onChangeText={(text) => {
               setValue(text);
             }}
-            // onFocus={() => setPhoneColor(true)}
-            // onBlur={() => setPhoneColor(false)}
             value={value}
-            containerStyle={{
-              // height: 50,
-              width: '100%',
-              backgroundColor: 'transparent',
-            }}
+            containerStyle={styles.containerstyle}
             // textInputStyle={{}}
             placeholder="Enter the Number"
             textContainerStyle={{
-              borderBottomWidth: 1,
+              ...styles.textcontainerstyle,
               borderColor: color
                 ? theme.bordersColor.darkOrangeB
                 : theme.bordersColor.borderColor,
-              backgroundColor: 'transparent',
             }}
-            codeTextStyle={{color: theme.textColors.placeholder}}
+            codeTextStyle={styles.codetextstyle}
           />
         </View>
 
         {/* ==============Global Button============= */}
 
-        <View style={{alignItems: 'center', marginVertical: 10}}>
+        <View style={styles.globalbtview}>
           <GlobalButton
             title={'Sign Up'}
             titleStyle={{fontSize: 13}}
@@ -135,30 +115,12 @@ const App = (props) => {
   // ================ Const SignIn =================
   const _SignIn = () => {
     return (
-      <View
-        style={{
-          // flex: 0.2,
-          // backgroundColor: 'blue',
-          width: '90%',
-          alignSelf: 'center',
-        }}>
-        <Text
-          style={{
-            color: theme.textColors.lightYellow,
-            marginTop: 20,
-          }}>
-          Phone Number
-        </Text>
+      <View style={styles.viewcenter}>
+        <Text style={styles.signinphonetext}>Phone Number</Text>
 
         {/* =========Number Input========= */}
 
-        <View
-          style={{
-            width: '100%',
-            alignSelf: 'center',
-            // height: 50,
-            marginVertical: 20,
-          }}>
+        <View style={styles.signinnumberinputView}>
           {/* {showMessage && (
             <View style={{}}>
               <Text>Value : {value}</Text>
@@ -179,42 +141,24 @@ const App = (props) => {
             withDarkTheme={false}
             // withShadow
             // autoFocus
-            containerStyle={{
-              width: '100%',
-              color: theme.textColors.placeholder,
-              backgroundColor: 'transparent',
-            }}
-            textContainerStyle={{
-              borderBottomWidth: 1,
-              borderColor: theme.bordersColor.borderColor,
-              color: theme.textColors.placeholder,
-              backgroundColor: 'transparent',
-            }}
-            codeTextStyle={{
-              color: theme.textColors.placeholder,
-            }}></PhoneInput>
+            containerStyle={styles.signincontainerstyle}
+            textContainerStyle={styles.signintextcontainer}
+            codeTextStyle={styles.signincodetext}></PhoneInput>
         </View>
         {/* ==============Global Button============= */}
 
-        <View style={{alignItems: 'center'}}>
+        <View style={styles.sigininbtview}>
           <GlobalButton
             title={'Sign In'}
             titleStyle={{fontSize: 13}}
             onPress={() => _SignInB()}
           />
 
-          <Text style={{textAlign: 'center', marginVertical: 10, fontSize: 16}}>
-            or
-          </Text>
+          <Text style={styles.Ortext}>or</Text>
 
           {/* ==========Social Buttons========== */}
 
-          <View
-            style={{
-              flexDirection: 'row',
-              width: '100%',
-              justifyContent: 'space-around',
-            }}>
+          <View style={styles.socialbtmainview}>
             <GmailButton />
             <FacebookButton />
           </View>
@@ -222,22 +166,17 @@ const App = (props) => {
 
         {/* ==========Forgot Password========== */}
 
-        <View
-          style={{
-            marginVertical: 30,
-            // backgroundColor: 'pink',
-            width: '60%',
-            alignItems: 'center',
-          }}>
-          <Text style={{fontFamily: 'Roboto-Bold'}}>Forgot Password ?</Text>
+        <View style={styles.forgotmainview}>
+          <Text style={styles.forgottext}>Forgot Password ?</Text>
         </View>
       </View>
     );
   };
+  // =======main=====
   return (
     <ImageBackground
       source={require(path)}
-      style={{height: '100%', width: '100%', flex: 1}}
+      style={styles.mainimgbdview}
       resizeMode={'cover'}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <Header
@@ -246,50 +185,39 @@ const App = (props) => {
           //  isVisibleIcon={true}
           // drawerIcon={true}
         />
-        <View
-          style={{
-            flex: 0.6,
-            justifyContent: 'flex-end',
-            width: '90%',
-            alignSelf: 'center',
-            // backgroundColor: 'pink',
-          }}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            {/* =======Sign In===== */}
+        {/* ======signin and signup touch==== */}
+        <View style={styles.tapmainview}>
+          <View style={styles.taprowview}>
+            {/* =======tap Sign In===== */}
             <TouchableOpacity
               onPress={() => setClicked(true)}
               style={{
-                borderBottomWidth: 5,
-                width: '47%',
+                ...styles.tapsigintouch,
                 borderColor: isClicked
                   ? theme.bordersColor.orangeBorder
                   : 'transparent',
               }}>
               <Text
                 style={{
-                  fontSize: 17,
-                  fontFamily: 'Roboto-Regular',
+                  ...styles.tapsigintext,
                   color: isClicked
                     ? theme.textColors.lightBlack
                     : theme.textColors.lightGray,
-                  marginLeft: 5,
                 }}>
                 Sign In
               </Text>
               <Text
                 style={{
-                  fontSize: 22,
-                  fontFamily: 'Roboto-Bold',
+                  ...styles.sigintoaccounttext,
                   color: isClicked
                     ? theme.textColors.lightBlack
                     : theme.textColors.lightGray,
-                  marginLeft: 5,
                 }}>
                 To Account
               </Text>
             </TouchableOpacity>
 
-            {/* ====SignUp==== */}
+            {/* ==== tapSignUp==== */}
 
             <TouchableOpacity
               onPress={() => {
@@ -297,16 +225,14 @@ const App = (props) => {
                 _CreateAccount(true);
               }}
               style={{
-                borderBottomWidth: 5,
-                width: '47%',
+                ...styles.tapsignuptouch,
                 borderColor: isClicked
                   ? 'transparent'
                   : theme.bordersColor.orangeBorder,
               }}>
               <Text
                 style={{
-                  fontSize: 17,
-                  fontFamily: 'Roboto-Regular',
+                  ...styles.tapsignuptext,
                   color: isClicked
                     ? theme.textColors.lightGray
                     : theme.textColors.lightBlack,
@@ -315,8 +241,7 @@ const App = (props) => {
               </Text>
               <Text
                 style={{
-                  fontSize: 22,
-                  fontFamily: 'Roboto-Bold',
+                  ...styles.signupcreateacc,
                   color: isClicked
                     ? theme.textColors.lightGray
                     : theme.textColors.lightBlack,

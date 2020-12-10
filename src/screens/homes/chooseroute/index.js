@@ -5,6 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {theme} from '../../../constants/theme';
 import GlobalButton from '../../../components/buttons/globalbutton';
 import BgCustom from '../../../components/bgcustom';
+import styles from './styles';
 
 const App = (props) => {
   const [pickupA, setPickupA] = useState('');
@@ -31,56 +32,31 @@ const App = (props) => {
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <BgCustom {...props} name="Route" suggest="Choose Your">
-        {/* ========== 2nd flex ========== */}
+        {/* ==========main view========== */}
 
-        <View
-          style={{
-            flex: 0.9,
-            alignItems: 'center',
-            padding: 10,
-            width: '87%',
-            alignSelf: 'center',
-            // backgroundColor: 'pink',
-          }}>
+        <View style={styles.mainView}>
           {/* ==========Pick Up Location========== */}
-
+          {/* borderColor: color ? theme.bordersColor.darkOrangeB :
+          theme.bordersColor.borderColor, */}
           <View
             style={{
-              borderBottomWidth: 1,
+              ...styles.BordercolorPickup,
               borderColor: color
                 ? theme.bordersColor.darkOrangeB
                 : theme.bordersColor.borderColor,
-              //   marginTop: 10,
-              // width: '90%',
             }}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={styles.flexrowView}>
               <MaterialIcons
                 name="gps-not-fixed"
                 size={25}
                 color={theme.iconsColor.darkOrange}
               />
 
-              <Text
-                style={{
-                  fontSize: 17,
-                  color: theme.textColors.lightBlack,
-                  fontFamily: 'Roboto-Bold',
-                  marginLeft: 8,
-                }}>
-                Pick Up Location
-              </Text>
+              <Text style={styles.pickuptextstyle}>Pick Up Location</Text>
             </View>
 
             <View>
-              <Text
-                style={{
-                  color: theme.textColors.orange,
-                  fontSize: 15,
-                  fontFamily: 'Roboto-Thin',
-                  marginTop: 7,
-                }}>
-                Enter Address
-              </Text>
+              <Text style={styles.enteradressText}>Enter Address</Text>
             </View>
 
             <View
@@ -99,12 +75,7 @@ const App = (props) => {
                 style={{fontSize: 15, width: '90%'}}
               />
 
-              <View
-                style={{
-                  justifyContent: 'center',
-                  width: '10%',
-                  alignItems: 'center',
-                }}>
+              <View style={styles.iconpickupViews}>
                 <Ionicons
                   name="location"
                   size={17}
@@ -115,28 +86,22 @@ const App = (props) => {
           </View>
           <View
             style={{
-              alignItems: 'center',
-              marginVertical: 2,
-              width: '100%',
+              ...styles.warningPickupView,
               backgroundColor: isError ? '#ffeeee' : null,
-              borderRadius: 20,
             }}>
-            <Text style={{color: 'red', fontSize: 12}}>
+            <Text style={styles.warningtext}>
               {isError ? 'Please Fill a Valid Address' : null}
             </Text>
           </View>
-
           {/* ========== Package Destination ========== */}
-
           <View
             style={{
-              borderBottomWidth: 1,
+             ...styles.borderPackageView,
               borderColor: color2
                 ? theme.bordersColor.darkOrangeB
                 : theme.bordersColor.borderColor,
-              marginTop: 20,
             }}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <View style={styles.packagerowView}>
               <MaterialIcons
                 name="gps-fixed"
                 size={25}
@@ -144,24 +109,14 @@ const App = (props) => {
               />
 
               <Text
-                style={{
-                  fontSize: 17,
-                  color: theme.textColors.lightBlack,
-                  fontFamily: 'Roboto-Bold',
-                  marginLeft: 8,
-                }}>
+                style={styles.packagedestinationText}>
                 Package Destination
               </Text>
             </View>
 
             <View>
               <Text
-                style={{
-                  color: theme.textColors.orange,
-                  fontSize: 12,
-                  fontFamily: 'Roboto-Thin',
-                  marginTop: 7,
-                }}>
+                style={styles.enteradressText}>
                 Enter Address
               </Text>
             </View>
@@ -182,11 +137,7 @@ const App = (props) => {
               />
 
               <View
-                style={{
-                  justifyContent: 'center',
-                  width: '10%',
-                  alignItems: 'center',
-                }}>
+                style={styles.icondestinationView}>
                 <Ionicons
                   name="location"
                   size={17}
@@ -197,13 +148,10 @@ const App = (props) => {
           </View>
           <View
             style={{
-              alignItems: 'center',
-              marginVertical: 2,
-              width: '100%',
+            ...styles.warningdestination,
               backgroundColor: isError2 ? '#ffeeee' : null,
-              borderRadius: 20,
             }}>
-            <Text style={{color: 'red', fontSize: 12}}>
+            <Text style={styles.warningtext}>
               {isError2 ? 'Please Fill a Valid Destination' : null}
             </Text>
           </View>
@@ -212,12 +160,7 @@ const App = (props) => {
         {/* ========== Button ========== */}
 
         <View
-          style={{
-            flex: 0.1,
-            justifyContent: 'flex-end',
-            marginVertical: 10,
-            // backgroundColor: 'red',
-          }}>
+          style={styles.buttonView}>
           <GlobalButton title={'Continue'} onPress={() => _Continue1()} />
         </View>
       </BgCustom>

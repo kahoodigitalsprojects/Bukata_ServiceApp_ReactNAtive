@@ -5,6 +5,7 @@ import GlobalButton from '../../../components/buttons/globalbutton';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import Header from '../../../components/header';
 import Toastmessage from '../../../components/toastmessage';
+import styles from './styles';
 
 const App = (props) => {
   const [isFilled, setFilled] = useState(false);
@@ -22,7 +23,7 @@ const App = (props) => {
   return (
     <ImageBackground
       source={require('../../../assets/images/bg6.png')}
-      style={{height: '100%', width: '100%', flex: 1}}
+      style={styles.imgbackground}
       resizeMode={'cover'}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
         <Header
@@ -32,12 +33,9 @@ const App = (props) => {
           isVisibleIcon={true}
           // drawerIcon={true}
         />
+        {/* ===========otp=========== */}
         <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'space-around',
-          }}>
+          style={styles.otpview}>
           <OTPInputView
             style={{
               width: '80%',
@@ -59,12 +57,7 @@ const App = (props) => {
             //   }
             // }}
             codeInputFieldStyle={{
-              width: 65,
-              height: 65,
-              fontSize: 30,
-              borderWidth: 1.5,
-              borderRadius: 5,
-              color: theme.textColors.black,
+              ...styles.codeinputfieldstyle,
               borderColor: isFilled ? 'green' : theme.bordersColor.lightYellow,
             }}
             onCodeFilled={(text) => SetCode(text)}
