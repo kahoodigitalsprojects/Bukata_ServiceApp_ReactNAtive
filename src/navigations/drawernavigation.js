@@ -15,7 +15,7 @@ function MyDrawer(props) {
       drawerContent={(props) => <DrawerContent {...props} />}
       drawerStyle={{backgroundColor: '#ef6c00'}}>
       <Drawer.Screen
-        options={{headerShown: false}}
+        options={{headerShown: false, drawerLabel: false}}
         name="Home"
         component={Homes}
       />

@@ -17,6 +17,8 @@ import taskdetail from '../screens/homes/taskdetail';
 import successtask from '../screens/homes/successtask';
 import splash from '../screens/auth/splash';
 import verifydeliverypakages from '../screens/auth/verifydeliverypakage';
+import payment from '../screens/homes/payment';
+import creditcard from '../screens/homes/creditcard';
 const Stack = createStackNavigator();
 
 function Auth() {
@@ -43,6 +45,16 @@ export function Homes() {
       <Stack.Screen
         name="home"
         component={home}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="payment"
+        component={payment}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="creditcard"
+        component={creditcard}
         options={{headerShown: false}}
       />
       <Stack.Screen

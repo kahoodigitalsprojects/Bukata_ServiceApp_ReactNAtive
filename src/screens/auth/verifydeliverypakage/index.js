@@ -23,13 +23,15 @@ const App = (props) => {
   const [name, setname] = useState('saad');
   function _SignUpB() {
     // let dbName = 'Samad';
-    if (name == '' || value == '') {
-      Toastmessage('Please Fill Inputs', '', 'info');
-    } else if (name.length >= 1 && value.length >= 1) {
-      props.navigation.navigate('task');
-    } else {
-      Toastmessage('You enter wrong details', '', 'error');
-    }
+    props.navigation.navigate('task');
+
+    // if (name == '' || value == '') {
+    //   Toastmessage('Please Fill Inputs', '', 'info');
+    // } else if (name.length >= 1 && value.length >= 1) {
+    //   props.navigation.navigate('task');
+    // } else {
+    //   Toastmessage('You enter wrong details', '', 'error');
+    // }
   }
 
   // ==============PhoneInputs==============

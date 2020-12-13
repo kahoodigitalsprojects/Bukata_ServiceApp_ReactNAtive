@@ -9,6 +9,10 @@ import {
 import {Value} from 'react-native-reanimated';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {theme} from '../../../constants/theme';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const DrawerContent = (props) => {
   let array;
   return (
@@ -78,47 +82,80 @@ const DrawerContent = (props) => {
           (array = [
             {
               title: 'Dashboard',
-              name: 'HomeScreen',
-              type: 'FontAwesome',
-              //   icon: require('../../assets/icons/home.png'),
+              name: 'home',
+
+              icon: (
+                <FontAwesome5
+                  name="clipboard-list"
+                  size={17}
+                  style={{marginRight: 15}}
+                  color={theme.textColors.orange}
+                />
+              ),
             },
             {
               title: 'Request History',
-              name: 'Match',
+              name: 'task',
               type: 'Entypo',
-              // icon: require('../assets/icons/70.png'),
-              //   icon: require('../../assets/icons/userss.png'),
+              icon: (
+                <FontAwesome5
+                  name="history"
+                  size={17}
+                  style={{marginRight: 15}}
+                  color={theme.textColors.orange}
+                />
+              ),
             },
             {
               title: 'Notification ',
-              name: 'Home',
+              name: 'taskdetail',
 
               type: 'Fontisto',
-              // icon: require('../assets/icons/69.png'),
-              //   icon: require('../../assets/icons/calendar.png'),
+              icon: (
+                <Ionicons
+                  name="notifications"
+                  size={17}
+                  style={{marginRight: 15}}
+                  color={theme.textColors.orange}
+                />
+              ),
             },
             {
               title: 'Setting ',
-              name: 'Home',
+              name: 'home',
               type: 'FontAwesome5',
-              // icon: require('../assets/icons/68.png'),
-              //icon: require('../../assets/icons/search.png'),
+              icon: (
+                <AntDesign
+                  name="setting"
+                  size={17}
+                  style={{marginRight: 15}}
+                  color={theme.textColors.orange}
+                />
+              ),
             },
 
             {
               title: 'Sign Out',
-              name: 'visitwebsite',
-
-              type: 'FontAwesome',
-              // icon: require('../assets/icons/67.png'),
-              // icon: require('../../assets/icons/info.png'),
+              name: 'signin',
+              icon: (
+                <MaterialCommunityIcons
+                  name="logout"
+                  size={17}
+                  style={{marginRight: 15}}
+                  color={theme.textColors.orange}
+                />
+              ),
             },
           ].map(
             (val, i) => (
               console.log('loop', val),
               (
                 <TouchableOpacity
-                  onPress={() => props.navigation.navigate('adminscreens')}
+                  onPress={() =>
+                    props.navigation.navigate(
+                      val.name ? val.name : props.navigation.closeDrawer(),
+                    )
+                  }
                   style={{
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -133,11 +170,7 @@ const DrawerContent = (props) => {
                     borderColor: '#dc92a2',
                     marginVertical: 10,
                   }}>
-                  <Image
-                    source={val.icon}
-                    style={{height: 15, width: 15, marginRight: 15}}
-                    resizeMode="contain"
-                  />
+                  {val.icon}
 
                   <Text
                     style={{

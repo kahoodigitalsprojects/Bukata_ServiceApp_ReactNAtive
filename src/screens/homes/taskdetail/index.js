@@ -6,10 +6,13 @@ import {theme} from '../../../constants/theme';
 import Toast from 'react-native-toast-message';
 import Toastmessage from '../../../components/toastmessage';
 import styles from './styles';
+import CheckBox from '@react-native-community/checkbox';
 
 const App = (props) => {
   const [color, setColor] = useState('');
   const [offer, setOffer] = useState('');
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
+
   const [isError, setError] = useState(false);
 
   function _Send() {
@@ -86,6 +89,28 @@ const App = (props) => {
           </Text>
         </View>
         {/* ==========offerview=========== */}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginTop: 10,
+            width: '90%',
+            marginVertical: 10,
+            alignSelf: 'center',
+          }}>
+          <CheckBox
+            disabled={false}
+            value={toggleCheckBox}
+            onFillColor={'blue'}
+            onCheckColor="red"
+            tintColors="red"
+            onValueChange={(newValue) => {
+              setToggleCheckBox(newValue);
+            }}
+          />
+          <Text> Internation Delivery </Text>
+        </View>
+
         <View style={styles.offerview1}>
           <View
             style={{
@@ -99,18 +124,21 @@ const App = (props) => {
               MAKE OFFER
             </Text>
           </View>
-
-          <TextInput
-            placeholder={'0'}
-            placeholderTextColor={theme.textColors.lightGray}
-            keyboardType={'number-pad'}
-            onChangeText={(offerText) => {
-              setOffer(offerText);
-            }}
-            onFocus={() => setColor(true)}
-            onBlur={() => setColor(false)}
-            style={styles.offertextinput}
-          />
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            {toggleCheckBox ? <Text style={{fontSize: 18}}>$ </Text> : null}
+            <TextInput
+              placeholder={'0'}
+              placeholderTextColor={theme.textColors.lightGray}
+              value={offer}
+              keyboardType={'number-pad'}
+              onChangeText={(offerText) => {
+                setOffer(offerText);
+              }}
+              onFocus={() => setColor(true)}
+              onBlur={() => setColor(false)}
+              style={[styles.offertextinput, {borderWidth: 0}]}
+            />
+          </View>
         </View>
         {/* ============warning========== */}
         <View

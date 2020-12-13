@@ -3,6 +3,7 @@ import 'react-native-gesture-handler';
 import Stack from './src/navigations/stacknavigation';
 import BGcustom from './src/components/bgcustom';
 import Toast from 'react-native-toast-message';
+import Payment from './src/screens/homes/payment';
 const App = (props) => {
   return (
     // <BGcustom />
