@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
-  Dimensions
+  Dimensions,
 } from 'react-native';
 import {theme} from '../../../constants/theme';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -22,7 +22,8 @@ const App = (props) => {
   }
 
   function _Deliver() {
-    props.navigation.navigate('task');
+    // props.navigation.navigate('task');
+    props.navigation.navigate('verifydeliverypakages');
   }
 
   const images = [
@@ -76,8 +77,7 @@ const App = (props) => {
             style={{
               flexDirection: 'row',
             }}>
-            <View
-              style={styles.rigtharrowview}>
+            <View style={styles.rigtharrowview}>
               <AntDesign
                 name="right"
                 size={22}
@@ -85,33 +85,21 @@ const App = (props) => {
               />
             </View>
             <View style={{justifyContent: 'center'}}>
-              <Text
-                style={styles.TextrowText}>
-                What do you
-              </Text>
-              <Text
-                style={styles.TextrowText2}>
-                want to do
-              </Text>
+              <Text style={styles.TextrowText}>What do you</Text>
+              <Text style={styles.TextrowText2}>want to do</Text>
             </View>
           </View>
 
           {/* ==========Boxes========== */}
 
-          <View
-            style={styles.BoxesMainview}>
-              {/* ================box1=========== */}
-            <TouchableOpacity
-              onPress={() => _Send()}
-              style={styles.touchBox1}>
+          <View style={styles.BoxesMainview}>
+            {/* ================box1=========== */}
+            <TouchableOpacity onPress={() => _Send()} style={styles.touchBox1}>
               <Image
                 source={require('../../../assets/images/package.png')}
                 style={styles.touchbox1image}
               />
-              <Text
-                style={styles.touchbox1Text}>
-                Send {'\n'}Package
-              </Text>
+              <Text style={styles.touchbox1Text}>Send {'\n'}Package</Text>
             </TouchableOpacity>
             {/* ===========box2=========== */}
             <TouchableOpacity
@@ -121,10 +109,7 @@ const App = (props) => {
                 source={require('../../../assets/images/box.png')}
                 style={styles.touchbox2image}
               />
-              <Text
-                style={styles.touchbox2text}>
-                Deliver {'\n'}Package
-              </Text>
+              <Text style={styles.touchbox2text}>Deliver {'\n'}Package</Text>
             </TouchableOpacity>
           </View>
         </View>

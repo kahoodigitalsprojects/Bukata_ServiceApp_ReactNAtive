@@ -26,6 +26,7 @@ const App = (props) => {
   const [date, setDate] = useState(new Date(1598051730000));
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
+  const [deliveryMessage, setMessage] = useState(false);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -72,32 +73,37 @@ const App = (props) => {
   ]);
   // ==========Border Change Function & State==========
   const [change, setChange] = useState('');
-  const _Change = (i) => {
-    setChange(i);
+  const _Change = (i, item) => {
+    // console.log('item', item);
+    if (item.title1 === 'Evening') {
+      console.log('true');
+      setChange(i);
+
+      setMessage(true);
+    } else {
+      setChange(i);
+
+      setMessage(false);
+      console.log('false  ');
+    }
   };
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <BgCustom {...props} name="Date & Time" suggest="Set Your">
         {/* ========Second Flex ======== */}
 
-        <View
-          style={styles.mainView}>
+        <View style={styles.mainView}>
           {/* ==========Date & Time Row========== */}
 
-          <View
-            style={styles.datetimeRowview}>
+          <View style={styles.datetimeRowview}>
             <Entypo name="calendar" color={theme.iconsColor.orange} size={25} />
 
-            <Text
-              style={styles.setdatetimeText}>
-              Set Date & Time
-            </Text>
+            <Text style={styles.setdatetimeText}>Set Date & Time</Text>
           </View>
 
           {/* ========== Date & Time Code ========== */}
 
-          <View
-            style={styles.datetimecodeMainView}>
+          <View style={styles.datetimecodeMainView}>
             <View style={{justifyContent: 'center', paddingLeft: 7}}>
               <Text>{`${moment(date).format(' dddd, DD MMM YYYY')}`}</Text>
             </View>
@@ -128,8 +134,7 @@ const App = (props) => {
 
           {/* ========== Box Row Wrap ==========  */}
 
-          <View
-            style={styles.BoxRowwrapMainView}>
+          <View style={styles.BoxRowwrapMainView}>
             {/* ========== Box with Map ==========  */}
 
             {array.map((item, i) => {
@@ -141,19 +146,25 @@ const App = (props) => {
                     ...styles.boxView,
                     borderWidth: change == i ? 1 : 0,
                   }}
-                  onPress={() => _Change(i)}>
+                  onPress={() => _Change(i, item)}>
                   <Image source={item.image} style={styles.ImageMap} />
 
-                  <Text style={styles.title1}>
-                    {item.title1}
-                  </Text>
-                  <Text style={styles.title2}>
-                    {item.title2}
-                  </Text>
+                  <Text style={styles.title1}>{item.title1}</Text>
+                  <Text style={styles.title2}>{item.title2}</Text>
                 </TouchableOpacity>
               );
             })}
           </View>
+          {deliveryMessage ? (
+            <Text
+              style={{
+                color: theme.iconsColor.orange,
+                marginLeft: 20,
+                marginVertical: 10,
+              }}>
+              10% Delivery fee will be increase in Evenining
+            </Text>
+          ) : null}
         </View>
 
         {/* ++++++++++++++++++++ button ++++++++++++++++++++ */}

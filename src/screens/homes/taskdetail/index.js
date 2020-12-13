@@ -23,10 +23,10 @@ const App = (props) => {
       setError(true);
     }
   }
-  let item = props.route.params.selectedTask;
+  let item = props?.route?.params?.selectedTask;
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1, backgroundColor: '#FFF'}}>
-      {console.log('NOW I GOT THE DATA', props.route.params.selectedTask)}
+      {/* {console.log('NOW I GOT THE DATA', props.route.params.selectedTask)} */}
       <Header
         text={'Tasks'}
         isTransparent={false}
@@ -34,88 +34,59 @@ const App = (props) => {
         navigation={props.navigation}
         //   drawerIcon={true}
       />
-      <View
-        style={styles.mainview}>
+      <View style={styles.mainview}>
         {/* ========== first row for profile ========== */}
 
-        <View
-          style={styles.firstrowview1}>
-          <View
-            style={styles.textView}>
-            <Text
-              style={styles.profiletext}>
-              J
-            </Text>
+        <View style={styles.firstrowview1}>
+          <View style={styles.textView}>
+            <Text style={styles.profiletext}>J</Text>
           </View>
-          <View
-            style={styles.profilenameview}>
-            <Text
-              style={styles.profileText}>
-              {item.name}
-            </Text>
-            <Text
-              style={styles.requesttext}>
-              15 Request{' '}
-            </Text>
+          <View style={styles.profilenameview}>
+            <Text style={styles.profileText}>{item?.name}</Text>
+            <Text style={styles.requesttext}>15 Request </Text>
           </View>
         </View>
         {/* =============dots view=========== */}
-        <View
-          style={styles.dotmainview}>
-         {/* ===========   yellow============== */}
+        <View style={styles.dotmainview}>
+          {/* ===========   yellow============== */}
           <View style={{flexDirection: 'row'}}>
-            <View
-              style={styles.yellowdot}></View>
+            <View style={styles.yellowdot}></View>
             <View>
               {/* ++++++++++++++++++yellow dot text View +++++++++++++++++++++++++ */}
-              <Text
-                style={styles.yellowdottext}>
-                First Gate Dadinkowa
-              </Text>
+              <Text style={styles.yellowdottext}>First Gate Dadinkowa</Text>
             </View>
           </View>
           {/* +++++++++++++++++++++++ midele small border ++++++++++++++++++++ */}
 
           <View style={{flexDirection: 'row'}}>
-            <View
-              style={styles.borderView}></View>
+            <View style={styles.borderView}></View>
           </View>
           {/* +++++++++++++++++++++++ orange dot view ++++++++++++++++++++ */}
           <View style={{flexDirection: 'row'}}>
-            <View
-              style={styles.orangedot}></View>
+            <View style={styles.orangedot}></View>
 
             {/* +++++++++++++++++++++++ orangr text view ++++++++++++++++++++ */}
             <View style={{marginBottom: 30}}>
-              <Text
-                style={styles.orangetext}>
-                Mees Palace Rayfield
-              </Text>
+              <Text style={styles.orangetext}>Mees Palace Rayfield</Text>
             </View>
           </View>
         </View>
 
         <View style={{width: '90%', marginTop: 20}}>
-          <Text
-            style={styles.packagedes}>
-            Package Description
-          </Text>
-          <Text
-            style={styles.weightdes}>
+          <Text style={styles.packagedes}>Package Description</Text>
+          <Text style={styles.weightdes}>
             Weight:
             <Text>Heavy</Text>
           </Text>
         </View>
         {/* ++++++++++++++++++paragraph view++++++++++++++++ */}
         <View style={styles.paraview}>
-          <Text
-            style={styles.packagedescription}>
+          <Text style={styles.packagedescription}>
             3 cartons of indome noodles to be deliverd to mees place kitchen
           </Text>
         </View>
-       {/* ==========offerview=========== */}
-       <View
-          style={styles.offerview1}>
+        {/* ==========offerview=========== */}
+        <View style={styles.offerview1}>
           <View
             style={{
               ...styles.makeofferview,
@@ -124,9 +95,7 @@ const App = (props) => {
                 : theme.taskColors.makeOfferBG,
             }}>
             <Text
-              style={{...styles.makeoffertext,
-                color: color ? '#FFF' : '#000',
-              }}>
+              style={{...styles.makeoffertext, color: color ? '#FFF' : '#000'}}>
               MAKE OFFER
             </Text>
           </View>
@@ -146,7 +115,7 @@ const App = (props) => {
         {/* ============warning========== */}
         <View
           style={{
-           ...styles.warningview,
+            ...styles.warningview,
             backgroundColor: isError ? '#ffeeee' : null,
           }}>
           <Text style={styles.warningtext}>
@@ -157,8 +126,7 @@ const App = (props) => {
 
       {/*++++++++++++++++ last button View++++++++++++++++ */}
 
-      <View
-        style={styles.buttonview}>
+      <View style={styles.buttonview}>
         <GlobalButton title={'Send Request'} onPress={() => _Send()} />
       </View>
       {/* ========== Toast Message ========== */}

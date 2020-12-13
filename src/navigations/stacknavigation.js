@@ -16,6 +16,7 @@ import contactinfo from '../screens/homes/contactinfo';
 import taskdetail from '../screens/homes/taskdetail';
 import successtask from '../screens/homes/successtask';
 import splash from '../screens/auth/splash';
+import verifydeliverypakages from '../screens/auth/verifydeliverypakage';
 const Stack = createStackNavigator();
 
 function Auth() {
@@ -42,6 +43,11 @@ export function Homes() {
       <Stack.Screen
         name="home"
         component={home}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="verifydeliverypakages"
+        component={verifydeliverypakages}
         options={{headerShown: false}}
       />
       <Stack.Screen

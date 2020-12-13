@@ -3,6 +3,7 @@ import {View, ScrollView, Text, TextInput} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {theme} from '../../../constants/theme';
+import CheckBox from '@react-native-community/checkbox';
 import GlobalButton from '../../../components/buttons/globalbutton';
 import BgCustom from '../../../components/bgcustom';
 import styles from './styles';
@@ -13,19 +14,17 @@ const App = (props) => {
   const [color, setColor] = useState('');
   const [color2, setColor2] = useState('');
   const [isError, setError] = useState(false);
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [isError2, setError2] = useState(false);
 
   function _Continue1() {
-    if (pickupA.length >= 1 && dropoffA.length >= 1) {
+    if ((pickupA.length >= 1 && dropoffA.length >= 1) || toggleCheckBox) {
       props.navigation.navigate('describepackage');
       setError(false);
       setError2(false);
-    } else if (pickupA == '') {
+    } else if (pickupA == '' && !toggleCheckBox) {
       setError(true);
-    } else if (dropoffA == '') {
-      setError2(true);
-    } else {
-      setError(true);
+    } else if (dropoffA == '' && !toggleCheckBox) {
       setError2(true);
     }
   }
@@ -34,10 +33,34 @@ const App = (props) => {
       <BgCustom {...props} name="Route" suggest="Choose Your">
         {/* ==========main view========== */}
 
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            // borderWidth: 1,
+            padding: 10,
+            width: '87%',
+            alignSelf: 'center',
+          }}>
+          <CheckBox
+            disabled={false}
+            value={toggleCheckBox}
+            onFillColor={'blue'}
+            onCheckColor="red"
+            tintColors="red"
+            onValueChange={(newValue) => {
+              setToggleCheckBox(newValue);
+              setError2(false);
+              setError(false);
+            }}
+          />
+          <Text> Use existing Delivery Companies </Text>
+        </View>
         <View style={styles.mainView}>
           {/* ==========Pick Up Location========== */}
           {/* borderColor: color ? theme.bordersColor.darkOrangeB :
           theme.bordersColor.borderColor, */}
+
           <View
             style={{
               ...styles.BordercolorPickup,
@@ -73,6 +96,7 @@ const App = (props) => {
                 onFocus={() => setColor(true)}
                 onBlur={() => setColor(false)}
                 style={{fontSize: 15, width: '90%'}}
+                editable={!toggleCheckBox}
               />
 
               <View style={styles.iconpickupViews}>
@@ -96,7 +120,7 @@ const App = (props) => {
           {/* ========== Package Destination ========== */}
           <View
             style={{
-             ...styles.borderPackageView,
+              ...styles.borderPackageView,
               borderColor: color2
                 ? theme.bordersColor.darkOrangeB
                 : theme.bordersColor.borderColor,
@@ -108,17 +132,13 @@ const App = (props) => {
                 color={theme.iconsColor.darkOrange}
               />
 
-              <Text
-                style={styles.packagedestinationText}>
+              <Text style={styles.packagedestinationText}>
                 Package Destination
               </Text>
             </View>
 
             <View>
-              <Text
-                style={styles.enteradressText}>
-                Enter Address
-              </Text>
+              <Text style={styles.enteradressText}>Enter Address</Text>
             </View>
 
             <View
@@ -127,6 +147,7 @@ const App = (props) => {
               }}>
               <TextInput
                 placeholder="Drop off address"
+                editable={!toggleCheckBox}
                 placeholderTextColor={theme.textColors.placeholder}
                 onChangeText={(text) => {
                   setdropoffA(text);
@@ -136,8 +157,7 @@ const App = (props) => {
                 style={{fontSize: 15, width: '90%'}}
               />
 
-              <View
-                style={styles.icondestinationView}>
+              <View style={styles.icondestinationView}>
                 <Ionicons
                   name="location"
                   size={17}
@@ -148,7 +168,7 @@ const App = (props) => {
           </View>
           <View
             style={{
-            ...styles.warningdestination,
+              ...styles.warningdestination,
               backgroundColor: isError2 ? '#ffeeee' : null,
             }}>
             <Text style={styles.warningtext}>
@@ -159,8 +179,7 @@ const App = (props) => {
 
         {/* ========== Button ========== */}
 
-        <View
-          style={styles.buttonView}>
+        <View style={styles.buttonView}>
           <GlobalButton title={'Continue'} onPress={() => _Continue1()} />
         </View>
       </BgCustom>
