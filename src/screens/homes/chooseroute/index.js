@@ -9,6 +9,7 @@ import BgCustom from '../../../components/bgcustom';
 import styles from './styles';
 
 const App = (props) => {
+  let deliveryBoy = props?.route?.params?.deliveryBoy;
   const [pickupA, setPickupA] = useState('');
   const [dropoffA, setdropoffA] = useState('');
   const [color, setColor] = useState('');
@@ -19,7 +20,9 @@ const App = (props) => {
 
   function _Continue1() {
     if ((pickupA.length >= 1 && dropoffA.length >= 1) || toggleCheckBox) {
-      props.navigation.navigate('describepackage');
+      deliveryBoy
+        ? props.navigation.navigate('task')
+        : props.navigation.navigate('describepackage');
       setError(false);
       setError2(false);
     } else if (pickupA == '' && !toggleCheckBox) {
@@ -42,19 +45,23 @@ const App = (props) => {
             width: '87%',
             alignSelf: 'center',
           }}>
-          <CheckBox
-            disabled={false}
-            value={toggleCheckBox}
-            onFillColor={'blue'}
-            onCheckColor="red"
-            tintColors="red"
-            onValueChange={(newValue) => {
-              setToggleCheckBox(newValue);
-              setError2(false);
-              setError(false);
-            }}
-          />
-          <Text> Use existing Delivery Companies </Text>
+          {deliveryBoy ? null : (
+            <>
+              <CheckBox
+                disabled={false}
+                value={toggleCheckBox}
+                onFillColor={'blue'}
+                onCheckColor="red"
+                tintColors="red"
+                onValueChange={(newValue) => {
+                  setToggleCheckBox(newValue);
+                  setError2(false);
+                  setError(false);
+                }}
+              />
+              <Text> Use existing Delivery Companies </Text>
+            </>
+          )}
         </View>
         <View style={styles.mainView}>
           {/* ==========Pick Up Location========== */}

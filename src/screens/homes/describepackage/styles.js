@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
 
   //   ============box1=============
   touchableimage: {
-    width: '30%',
+    width: '100%',
     // height: 130,
     padding: 15,
     backgroundColor: theme.bgColorWhite,
@@ -76,21 +76,18 @@ const styles = StyleSheet.create({
     height: 62,
   },
   touchableTextview: {alignItems: 'center', justifyContent: 'center'},
-  TouchableText:{
+  TouchableText: {
     fontSize: 14,
     fontFamily: 'Roboto-Regular',
   },
 
+  //   =============button==============
 
-
-//   =============button==============
-
-ButtonMainview:{
+  ButtonMainview: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 0.1,
     marginVertical: 10,
   },
-  
 });
 export default styles;

@@ -23,8 +23,9 @@ const App = (props) => {
   const [name, setname] = useState('saad');
   function _SignUpB() {
     // let dbName = 'Samad';
-    props.navigation.navigate('task');
-
+    props.navigation.navigate('chooseroute', {
+      deliveryBoy: true,
+    });
     // if (name == '' || value == '') {
     //   Toastmessage('Please Fill Inputs', '', 'info');
     // } else if (name.length >= 1 && value.length >= 1) {
