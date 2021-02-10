@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, ScrollView, Text, TextInput} from 'react-native';
+import {View, ScrollView, Text, TextInput, AsyncStorage} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {theme} from '../../../constants/theme';
@@ -19,10 +19,13 @@ const App = (props) => {
   const [isError2, setError2] = useState(false);
 
   function _Continue1() {
+    _UserExistingAddress();
     if ((pickupA.length >= 1 && dropoffA.length >= 1) || toggleCheckBox) {
       deliveryBoy
         ? props.navigation.navigate('task')
-        : props.navigation.navigate('describepackage');
+        : !toggleCheckBox
+        ? props.navigation.navigate('describepackage')
+        : props.navigation.navigate('otherdeliveryservice');
       setError(false);
       setError2(false);
     } else if (pickupA == '' && !toggleCheckBox) {
@@ -31,6 +34,18 @@ const App = (props) => {
       setError2(true);
     }
   }
+  const _UserExistingAddress = () => {
+    if (toggleCheckBox)
+      AsyncStorage.setItem('existingaddress', '1').then((res) => {
+        console.log('addedd 1');
+      });
+    else {
+      AsyncStorage.setItem('existingaddress', '0').then((res) => {
+        console.log('addedd 1');
+      });
+    }
+  };
+
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
       <BgCustom {...props} name="Route" suggest="Choose Your">
@@ -105,7 +120,7 @@ const App = (props) => {
                 style={{fontSize: 15, width: '90%'}}
                 editable={!toggleCheckBox}
               />
-
+              {console.log('===', toggleCheckBox)}
               <View style={styles.iconpickupViews}>
                 <Ionicons
                   name="location"

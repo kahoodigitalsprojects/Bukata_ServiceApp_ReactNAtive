@@ -59,7 +59,7 @@ const App = (props) => {
       <BgCustom {...props} name="Package" suggest="Describe Your">
         <View style={styles.borderView}>
           {/*========== Describe Package ==========*/}
-          <View
+          {/* <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -112,7 +112,7 @@ const App = (props) => {
                 }}
               />
             </View>
-          </View>
+          </View> */}
 
           <View style={styles.describepackageViewrow}>
             <MaterialCommunityIcons

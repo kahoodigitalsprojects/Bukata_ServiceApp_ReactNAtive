@@ -19,6 +19,7 @@ import splash from '../screens/auth/splash';
 import verifydeliverypakages from '../screens/auth/verifydeliverypakage';
 import payment from '../screens/homes/payment';
 import creditcard from '../screens/homes/creditcard';
+import otherdeliveryservice from '../screens/homes/otherdeliveryservice';
 const Stack = createStackNavigator();
 
 function Auth() {
@@ -45,6 +46,11 @@ export function Homes() {
       <Stack.Screen
         name="home"
         component={home}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="otherdeliveryservice"
+        component={otherdeliveryservice}
         options={{headerShown: false}}
       />
       <Stack.Screen
