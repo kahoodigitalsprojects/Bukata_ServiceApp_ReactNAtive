@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   ScrollView,
@@ -8,7 +8,7 @@ import {
   TextInput,
 } from 'react-native';
 import PhoneInput from 'react-native-phone-number-input';
-import {theme} from '../../../constants/theme';
+import { theme } from '../../../constants/theme';
 import GlobalButton from '../../../components/buttons/globalbutton';
 import FacebookButton from '../../../components/buttons/facebookbutton';
 import GmailButton from '../../../components/buttons/gmailbutton';
@@ -41,7 +41,7 @@ const App = (props) => {
   }
 
   // ==============PhoneInputs==============
-  const [value, setValue] = useState('ss');
+  const [value, setValue] = useState('');
   const [formattedValue, setFormattedValue] = useState('');
   const [valid, setValid] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
@@ -104,7 +104,7 @@ const App = (props) => {
         <View style={styles.globalbtview}>
           <GlobalButton
             title={'Sign Up'}
-            titleStyle={{fontSize: 13}}
+            titleStyle={{ fontSize: 13 }}
             onPress={() => _SignUpB()}
           />
         </View>
@@ -150,7 +150,7 @@ const App = (props) => {
         <View style={styles.sigininbtview}>
           <GlobalButton
             title={'Sign In'}
-            titleStyle={{fontSize: 13}}
+            titleStyle={{ fontSize: 13 }}
             onPress={() => _SignInB()}
           />
 
@@ -178,12 +178,12 @@ const App = (props) => {
       source={require(path)}
       style={styles.mainimgbdview}
       resizeMode={'cover'}>
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Header
           text={true}
           isTransparent={true}
-          //  isVisibleIcon={true}
-          // drawerIcon={true}
+        //  isVisibleIcon={true}
+        // drawerIcon={true}
         />
         {/* ======signin and signup touch==== */}
         <View style={styles.tapmainview}>
